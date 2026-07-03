@@ -1,0 +1,4 @@
+[synaptic-disorder-otel] OTLP/HTTP receiver listening on http://127.0.0.1:4318
+[synaptic-disorder-otel] forwarding to SD Core at 127.0.0.1:9911
+[synaptic-disorder-otel] spans=4 → events=8
+[synaptic-disorder-otel] spans=2 → events=3

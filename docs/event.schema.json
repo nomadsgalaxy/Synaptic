@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://synaptic-disorder.dev/schemas/event/1.0/event.schema.json",
+  "title": "Synaptic Event v1.0",
+  "description": "Real-time activity event emitted by adapters and consumed by the dashboard.",
+  "type": "object",
+  "required": ["schema_version", "type", "timestamp", "adapter_id"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "session_start",
+        "session_end",
+        "prompt_received",
+        "model_thinking",
+        "response_streaming",
+        "response_complete",
+        "tool_call",
+        "tool_result",
+        "memory_recall",
+        "memory_added",
+        "memory_updated",
+        "memory_deleted",
+        "subagent_spawn",
+        "subagent_complete",
+        "error",
+        "bubble_added"
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp of the event."
+    },
+    "adapter_id": {
+      "type": "string",
+      "description": "Stable identifier of the adapter that emitted this event (e.g. 'claude-code-hooks', 'mcp-passive', 'otel-anthropic')."
+    },
+    "session_id": {
+      "type": "string",
+      "description": "Optional session identifier; consecutive events from the same agent run share this."
+    },
+    "payload": {
+      "type": "object",
+      "description": "Event-type-specific data. See docs/event-schema.md for per-type payload conventions. Common fields: text, tool_name, args, result, memory_id, region_hint, error_message."
+    }
+  }
+}

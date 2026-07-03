@@ -1,0 +1,7 @@
+sd_bank.db*
+*.exe
+.env
+.env.*
+tmp/
+__pycache__/
+node_modules/

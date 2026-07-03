@@ -1,0 +1,14 @@
+# Don't ship the host's binaries into the image
+sd-core
+sd-core.exe
+dist/
+
+# Caches
+.go-cache
+.cache
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+.DS_Store

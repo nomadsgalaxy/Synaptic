@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://synaptic-disorder.dev/schemas/memory/1.0/memory.schema.json",
+  "title": "Synaptic Memory Source v1.0",
+  "description": "Normalized memory record format. Memory providers translate from their native store (JSON file, Markdown folder, SQLite, or imports from external tools) into this schema.",
+  "type": "object",
+  "required": ["schema_version", "provider_id", "memories"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "provider_id": {
+      "type": "string",
+      "description": "Stable identifier of the memory provider (e.g. 'hindsight', 'json', 'markdown-folder', 'mcp-ai-reported')."
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "memories": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/memory" }
+    }
+  },
+  "$defs": {
+    "memory": {
+      "type": "object",
+      "required": ["id", "text"],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Stable identifier within the provider; treat as opaque."
+        },
+        "text": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "context": {
+          "type": "string",
+          "description": "Optional grouping (often a project name, e.g. 'project:event-tracker')."
+        },
+        "fact_type": {
+          "type": ["string", "null"],
+          "enum": ["observation", "world", "experience", "opinion", null]
+        },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" },
+        "linked_to": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Optional explicit graph edges; supplements the synapse computation."
+        },
+        "source_metadata": {
+          "type": "object",
+          "description": "Provider-specific extras passed through unmodified."
+        }
+      }
+    }
+  }
+}

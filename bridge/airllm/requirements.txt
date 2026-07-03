@@ -1,0 +1,46 @@
+# AirLLM sidecar — Tier 3 provider for Synaptic Core.
+#
+# Pin policy: minimum versions only. AirLLM's API has shifted between
+# 2.x releases (compression-flag positional vs kwarg, model-class
+# autodispatch); the server.py is defensive about both shapes. If a
+# future upstream change breaks things, pin to the last known-good
+# version here.
+
+airllm>=2.10,<3.0
+# airllm 2.11.x imports optimum.bettertransformer at startup. Two
+# cascading pins are required to keep that import alive:
+#   1. optimum >= 2.0 dropped the bettertransformer submodule entirely.
+#   2. transformers >= 4.49 broke bettertransformer's compat layer (the
+#      module raises RuntimeError on load: "BetterTransformer requires
+#      transformers<4.49").
+# Both pins drop the moment airllm upstream removes the bettertransformer
+# dependency (tracked in airllm GH issues).
+optimum>=1.20,<2.0
+# transformers 4.44 changed LlamaAttention.forward() to require a
+# pre-computed `position_embeddings=(cos, sin)` kwarg, computed by
+# LlamaModel.forward() via self.rotary_emb. AirLLM 2.11.x bypasses
+# LlamaModel by walking layers directly in airllm_base.forward() (its
+# whole layer-streaming-from-disk approach) and does NOT pre-compute
+# `position_embeddings`. Effect: `cos, sin = position_embeddings` at
+# modeling_llama.py:273 throws `TypeError: cannot unpack non-iterable
+# NoneType object` on the first attention layer, every generation
+# request. Pin transformers <4.44 to keep the rotary embedding
+# computation INSIDE the attention module where AirLLM expects it.
+# Lift the pin once airllm upstream patches its forward() to pre-
+# compute position_embeddings, OR ships its own LlamaModel that does.
+transformers>=4.40,<4.44
+torch>=2.1
+accelerate>=0.30
+bitsandbytes>=0.43  # required for 4bit/8bit compression
+# Optimised C++/CUDA kernels for bitsandbytes 4bit CPU gemm via
+# HuggingFace's kernels-community namespace. Without this, bitsandbytes
+# falls back to a pure-Python path for the inner inference loop —
+# correctness is preserved but throughput drops sharply on CPU-only
+# setups. Resolves the boot-time warning:
+#   "Failed to load CPU gemm_4bit_forward from kernels-community:
+#    No module named 'kernels'."
+kernels>=0.11.1
+# airllm 2.11.x imports Baichuan's tokenizer at startup, which uses
+# SentencePiece. Not declared in airllm's own requirements; surface here
+# so the missing-tokenizer ImportError doesn't bite at first load.
+sentencepiece>=0.1.99

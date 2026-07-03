@@ -1,0 +1,28 @@
+{
+  "name": "synaptic-mcp",
+  "version": "0.1.0",
+  "description": "Universal MCP server that lets any MCP-aware AI client (Claude Desktop, Cursor, Cline, Continue, Gemini CLI, Claude Code) push activity events into the Synaptic live brain dashboard.",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "synaptic-mcp": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "synaptic",
+    "observability",
+    "dashboard"
+  ],
+  "author": "Anthony Dragone",
+  "license": "SEE LICENSE IN ../../LICENSE",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  }
+}

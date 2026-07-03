@@ -1,0 +1,519 @@
+# Synaptic — full release-mode stack.
+#
+# One command brings up the whole thing on a clean machine:
+#
+#   docker compose up
+#
+# Then open: http://localhost:9911   (or the dashboard URL behind your tunnel)
+#
+# Two services. Two containers. SD Core does triple duty: event hub +
+# WebSocket + dashboard static-file server + bubble generator goroutine.
+# Ollama runs separately because it owns ~2 GB of model weights and has a
+# very different lifecycle (long downloads, large RSS).
+#
+#   - synaptic-core           → port 9911 (dashboard + API + WS + bubble gen)
+#   - synaptic-ollama-tier1   → port 11434 (always-on Tier 1 LLM; pulls
+#                                           llama3.2:3b on first run; serves
+#                                           classifier + embeddings + bubbles)
+#   - synaptic-ollama-tier2   (profile-gated `ollama-tier2`): on-demand
+#                              container for the nightly_run + research_request
+#                              workflows; managed by the lifecycle goroutine.
+#   - synaptic-airllm-tier2   (profile-gated `airllm-tier2`): peer LLM
+#                              service for users wanting 70B-class models
+#                              locally. Same dual-workflow shape as ollama-tier2.
+#
+# No host installs needed beyond Docker. The SQLite fallback bank lives in
+# a named Docker volume so memories persist across restarts. Ollama models
+# live in their own named volume so the multi-GB downloads survive
+# container rebuilds.
+#
+# First-run note: ollama pulls llama3.2:3b (~2 GB) on first launch. The
+# dashboard works without Ollama — region classification falls back to
+# keyword-only and thought bubbles to the pre-baked pool — so you can use
+# the dashboard immediately and let the model finish downloading in the
+# background.
+#
+# Remote operation: see docs/REMOTE.md (Cloudflare Tunnel + Tailscale paths).
+# Set SD_API_TOKEN in a .env file or shell to enable Bearer-token auth on
+# the API endpoints. Without it, the API is open (suitable for localhost or
+# Tailscale-only deployments).
+#
+# For dev iteration on SD Core, just `docker compose up -d --build` here —
+# the build context is ./bridge/core and the data dir bind-mount means source
+# edits to assets/, dashboard HTML, etc. are reflected without a rebuild.
+
+name: synaptic
+
+services:
+  core:
+    build: ./bridge/core
+    image: synaptic/core:latest
+    container_name: synaptic-core
+    ports:
+      - "9911:9911"
+    volumes:
+      # The project tree provides the dashboard's index.html, assets/, and
+      # memories.json source. SD Core's static handler serves only whitelisted
+      # paths (/, /index.html, /assets/*, /favicon.ico, /bubbles.json) so source
+      # code under tools/, bridge/, docs/ is never web-accessible even though
+      # the volume is mounted.
+      #
+      # Mounted RW so the bubble generator can write
+      # assets/thought_bubbles.json. SD Core only writes to that file and to
+      # the bank path under /var/lib/sd; everything else is left untouched.
+      - ./:/data
+      - synaptic-bank:/var/lib/sd
+      # Wave 7a Docker control plane. Enabled in this deployment alongside
+      # SD_ALLOW_DOCKER_SOCKET=1 in .env. Grants SD Core the ability to
+      # list/start/stop/restart containers in this compose project, stream
+      # their logs, and expose them in the dashboard's Services panel.
+      # Security: root-equivalent access on the host — anyone who can talk
+      # to SD Core can talk to the Docker daemon. Comment this line out
+      # AND remove SD_ALLOW_DOCKER_SOCKET from .env to disable.
+      - "/var/run/docker.sock:/var/run/docker.sock:rw"
+    environment:
+      SD_CORE_LISTEN: "0.0.0.0:9911"
+      SD_DATA_DIR: "/data"
+      SD_RING_SIZE: "1000"
+      SD_BANK_PATH: "/var/lib/sd/sd_bank.db"
+      # Bubble generator + classifier + sensitivity AI all point at the
+      # always-on Tier 1 Ollama container. Disable bubble gen with
+      # SD_BUBBLE_GEN=0 or sensitivity AI with SD_SENSITIVE_AI=0 in your
+      # shell / .env.
+      SD_OLLAMA_URL: "http://ollama-tier1:11434"
+      # Pass-through for benchmark-side opt-outs (sensitive classifier
+      # off during benchmark runs frees Tier 2 to focus on /reflect
+      # synthesis; otherwise the classifier batches starve the
+      # synthesis call queue on shared-Ollama deploys).
+      SD_SENSITIVE_AI: "${SD_SENSITIVE_AI:-1}"
+      # v2.7 Bundle P split-out — dedicated embedding container.
+      # ForEmbedding() falls through to SD_OLLAMA_URL when this is
+      # unset, so a host that hasn't enabled the embed split is still
+      # served by the tier1 container. New deploys point straight at
+      # the dedicated embedder.
+      SD_OLLAMA_EMBED_URL: "${SD_OLLAMA_EMBED_URL:-http://ollama-embed:11434}"
+      # Tier 2 model used by NightlyRunner (P5-8+). Must match the model
+      # the ollama service is pulling (see SD_NIGHTLY_MODEL there). Empty
+      # disables Tier 2; ModelRouter.ForNightly() then degrades to Tier 1.
+      SD_NIGHTLY_MODEL: "${SD_NIGHTLY_MODEL:-llama3.1:8b}"
+      # v2.7 Bundle P — default embed model. ForEmbedding() returns
+      # an OllamaProvider against this model when no TierEmbedding
+      # row + no SD_SYNAPSE_MODEL env are set (the default for fresh
+      # installs). The ollama-tier1 service pulls this on first boot.
+      # Override per-bank via PUT /settings/providers/tier_embedding
+      # or per-deployment via SD_SYNAPSE_MODEL (env wins over default).
+      SD_EMBED_MODEL_DEFAULT: "${SD_EMBED_MODEL_DEFAULT:-nomic-embed-text:v1.5}"
+      # Auto-migrate existing embeddings to the new default on first
+      # boot. Set to "1" to skip the migration and pin the bank to its
+      # legacy Tier-1 embedding label (recall keeps working under the
+      # old label; new memories accumulate under the old label too).
+      SD_SKIP_EMBED_MIGRATION: "${SD_SKIP_EMBED_MIGRATION:-0}"
+      # Bearer-token auth on API endpoints. Empty = open mode.
+      # For remote deployments behind Cloudflare Tunnel, set this to a
+      # randomly-generated token (e.g. `openssl rand -hex 24`) and use the
+      # same value in every adapter's SD_API_TOKEN env var.
+      SD_API_TOKEN: "${SD_API_TOKEN:-}"
+      # Per-tier provider API keys. Forwarded from the host `.env` (written
+      # by the dashboard's Save-to-.env action via /admin/env_write).
+      # Empty when a tier runs on local Ollama; populated when a tier
+      # points at a remote provider (OpenAI / Anthropic / etc.). The
+      # backend reads these via os.Getenv() — without these passthroughs
+      # the keys never reach the container even if .env has them.
+      SD_TIER1_API_KEY: "${SD_TIER1_API_KEY:-}"
+      SD_TIER2_API_KEY: "${SD_TIER2_API_KEY:-}"
+      SD_TIER3_API_KEY: "${SD_TIER3_API_KEY:-}"
+      SD_NIGHTLY_API_KEY: "${SD_NIGHTLY_API_KEY:-}"
+      # Wave 7a Docker control plane — gates the /admin/docker/* endpoints.
+      # Off by default. Set to "1" in your .env to enable the dashboard's
+      # Services panel, AND uncomment the docker.sock volume below.
+      # ⚠ Docker socket access is root-equivalent on the host. Read
+      # `bridge/core/handlers_admin_docker.go` security notes before flipping.
+      SD_ALLOW_DOCKER_SOCKET: "${SD_ALLOW_DOCKER_SOCKET:-0}"
+      SD_DOCKER_SERVICE_ALLOWLIST: "${SD_DOCKER_SERVICE_ALLOWLIST:-^synaptic-}"
+      SD_COMPOSE_PROJECT: "${SD_COMPOSE_PROJECT:-synaptic}"
+      SD_DOCKER_SOCKET: "${SD_DOCKER_SOCKET:-/var/run/docker.sock}"
+      SD_DOCKER_RATE_LIMIT_MS: "${SD_DOCKER_RATE_LIMIT_MS:-2000}"
+      # ─── Provider mode B: direct LM Studio / llama.cpp / vLLM (opt-in) ──
+      # v2.6 Bundle E. Bundle-E auto-detects local-network URLs and treats
+      # them like Ollama (skips the sensitive-content egress filter, allows
+      # them at TierEmbedding, optional API key). Uncomment + edit one or
+      # more tiers below to route directly to a local OpenAI-compatible
+      # server without going through the Ollama emulation proxy.
+      #
+      # BaseURL MUST be loopback / RFC1918 / .local / .lan / .internal —
+      # the validator REFUSES public URLs for `custom` configured as a
+      # local tier (so a misconfigured user can't accidentally leak memory
+      # bodies to a cloud endpoint via this path).
+      #
+      # `KIND=openai_local` is accepted as a backwards-compat synonym for
+      # the submitter's CHANGES.md doc audience; both spellings resolve to
+      # the same `custom` provider with Local=true.
+      #
+      # SD_TIER1_KIND: "custom"           # or "openai_local"
+      # SD_TIER1_URL:  "http://192.168.x.x:1234/v1"
+      # SD_TIER1_MODEL: "qwen3.5-4b-heretic-v2-i1:latest"
+      # SD_TIER1_TIMEOUT_S: "120"
+      #
+      # SD_TIER2_KIND: "custom"
+      # SD_TIER2_URL:  "http://192.168.x.x:1234/v1"
+      # SD_TIER2_MODEL: "qwen3.5-35b-a3b-heretic:latest"
+      # SD_TIER2_TIMEOUT_S: "300"
+      #
+      # SD_TIER3_KIND: "custom"
+      # SD_TIER3_URL:  "http://192.168.x.x:8001/v1"
+      # SD_TIER3_MODEL: "qwen3.5-35b-a3b-heretic:latest"
+      # SD_TIER3_TIMEOUT_S: "600"
+      #
+      # SD_EMBED_KIND:  "custom"
+      # SD_EMBED_URL:   "http://192.168.x.x:1236/v1"
+      # SD_EMBED_MODEL: "text-embedding-nomic-embed-text-v1.5:latest"
+      # SD_EMBED_TIMEOUT_S: "120"
+      #
+      # ─── Bundle H profile wiring (point a tier at a profile-gated
+      # runtime running inside the compose network) ───
+      # llama.cpp server: docker compose --profile llama-cpp up -d
+      # SD_TIER2_KIND: "custom"
+      # SD_TIER2_URL:  "http://llama-cpp-server:8080/v1"
+      # SD_TIER2_MODEL: "qwen2.5-0.5b-instruct"
+      # SD_TIER2_TIMEOUT_S: "120"
+      #
+      # LocalAI: docker compose --profile localai up -d
+      # SD_TIER2_KIND: "custom"
+      # SD_TIER2_URL:  "http://localai:8080/v1"
+      # SD_TIER2_MODEL: "phi-3-mini-4k"
+      # SD_TIER2_TIMEOUT_S: "180"
+    depends_on:
+      ollama-tier1:
+        condition: service_started
+      ollama-embed:
+        condition: service_started
+    restart: unless-stopped
+    # The Dockerfile already declares a self-probe HEALTHCHECK using the
+    # binary's -healthcheck flag (scratch base = no shell/wget). Override
+    # here only to keep timing knobs co-located with the rest of the
+    # service config; the CMD form invokes the same probe.
+    healthcheck:
+      test: ["CMD", "/sd-core", "-healthcheck"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # ──────────────────────────────────────────────────────────────────────
+  # Per-tier Ollama containers (wave 7c1 + wave 8 retirement of the
+  # legacy single-container `ollama` service + wave 8c Tier-3
+  # consolidation):
+  #
+  #   ollama-tier1 — default, always-on. Real-time ingest + embeddings.
+  #                  Owns host port 11434 so existing
+  #                  `http://localhost:11434` provider configs keep
+  #                  working without edits.
+  #   ollama-tier2 — profile-gated `ollama-tier2`. On-demand-lazy
+  #                  (idle 5m). Wave 8c: serves BOTH `nightly_run` and
+  #                  local `research_request` workflows — the dedicated
+  #                  `ollama-tier3` container was retired because the
+  #                  same model serves both equally well.
+  #
+  # Tier 3 — no dedicated container. The Tier 3 provider config either
+  # points at `ollama-tier2`/`airllm-tier2` for local LLM use OR at a
+  # remote API (OpenAI/Anthropic/etc.) for live-internet research.
+  # ──────────────────────────────────────────────────────────────────────
+
+  # Tier 1 — always-on, real-time ingest + embeddings. This is the
+  # default Ollama container shipped with SD Core. Default model:
+  # llama3.2:3b. Keep-alive 24h so the small model stays resident.
+  # SD Core reaches it via the compose-network DNS name
+  # `synaptic-ollama-tier1:11434`; the host port-binding to 11434
+  # preserves localhost compatibility with adapters running outside
+  # Docker.
+  ollama-tier1:
+    image: ollama/ollama:latest
+    container_name: synaptic-ollama-tier1
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-tier1-data:/root/.ollama
+    environment:
+      OLLAMA_HOST: "0.0.0.0:11434"
+      OLLAMA_ORIGINS: "*"
+      OLLAMA_KEEP_ALIVE: "24h"
+      SD_OLLAMA_MODEL: "${SD_OLLAMA_TIER1_MODEL:-llama3.2:3b}"
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        /bin/ollama serve &
+        pid=$$!
+        until /bin/ollama list >/dev/null 2>&1; do sleep 1; done
+        echo "ollama-tier1: pulling chat model $$SD_OLLAMA_MODEL (no-op if cached)"
+        /bin/ollama pull "$$SD_OLLAMA_MODEL" || echo "ollama-tier1: chat pull failed, continuing"
+        wait $$pid
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/bin/ollama", "list"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # Embedding tier — dedicated Ollama container for nomic-embed-text.
+  # v2.7 Bundle P split this out of ollama-tier1 so:
+  #   - the chat model and the embedder have independent lifecycles
+  #     (you can swap the embedder without restarting the classifier),
+  #   - OOM in one role can't take the other down,
+  #   - the embedding hot path doesn't compete for runtime with the
+  #     Tier 1 chat model on the same Ollama process.
+  # Container is small (~400 MB resident with nomic-embed-text:v1.5).
+  # Reachable inside the compose network as `synaptic-ollama-embed:11434`;
+  # exposed to the host on 11435 (11434 = tier1 chat, 11436 = tier2).
+  ollama-embed:
+    image: ollama/ollama:latest
+    container_name: synaptic-ollama-embed
+    ports:
+      - "11435:11434"
+    volumes:
+      - ollama-embed-data:/root/.ollama
+    environment:
+      OLLAMA_HOST: "0.0.0.0:11434"
+      OLLAMA_ORIGINS: "*"
+      # 24h keep-alive — embeddings get called on every adapter write
+      # and every /recall, so the model should stay resident.
+      OLLAMA_KEEP_ALIVE: "24h"
+      SD_OLLAMA_EMBED_MODEL: "${SD_OLLAMA_EMBED_MODEL:-nomic-embed-text:v1.5}"
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        /bin/ollama serve &
+        pid=$$!
+        until /bin/ollama list >/dev/null 2>&1; do sleep 1; done
+        echo "ollama-embed: pulling embed model $$SD_OLLAMA_EMBED_MODEL (no-op if cached)"
+        /bin/ollama pull "$$SD_OLLAMA_EMBED_MODEL" || echo "ollama-embed: pull failed, continuing"
+        wait $$pid
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/bin/ollama", "list"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # Tier 2 — on-demand burst (managed by the lifecycle goroutine).
+  # Default model: llama3.1:8b. Short keep-alive so the model unloads
+  # quickly between dream-cycle bursts.
+  ollama-tier2:
+    profiles: ["ollama-tier2"]
+    image: ollama/ollama:latest
+    container_name: synaptic-ollama-tier2
+    ports:
+      - "11436:11434"
+    volumes:
+      - ollama-tier2-data:/root/.ollama
+    environment:
+      OLLAMA_HOST: "0.0.0.0:11434"
+      OLLAMA_ORIGINS: "*"
+      # Bump KEEP_ALIVE from 10m → 1h so the model stays resident through
+      # a long backfill (2,800+ memories × ~2s = ~90 min) — would otherwise
+      # unload mid-run during natural pauses and pay a 30-60s cold-load
+      # penalty on the next Chat(). Lifecycle's 5-min idle reaper still
+      # stops the whole container when the workflow is done, so this only
+      # affects the live phase. Set "-1" to never unload while the
+      # container is up.
+      OLLAMA_KEEP_ALIVE: "1h"
+      # Flash Attention 2 — Ollama's FA2 path is ~15-30% faster on
+      # supported GPUs (Ampere+ NVIDIA, RDNA3+ AMD). Free win when
+      # available; silently degrades to the SDPA path otherwise. See
+      # https://github.com/ollama/ollama/blob/main/docs/faq.md#how-can-i-make-ollama-faster
+      OLLAMA_FLASH_ATTENTION: "1"
+      # Quantize the K/V cache to int8 — frees ~30% of VRAM occupied by
+      # the attention cache at <1% quality loss. Lets the same GPU host
+      # a bigger context window or a larger model without OOM. Marginal
+      # speed effect (memory bandwidth bound).
+      OLLAMA_KV_CACHE_TYPE: "q8_0"
+      # Parallel request slots. The backfill loop is currently serial
+      # (one Chat at a time), but raising this is a no-cost prep step
+      # for the planned worker-pool refactor that'll process memories
+      # 2-4× faster. Default is 4; keep it explicit for visibility.
+      OLLAMA_NUM_PARALLEL: "4"
+      SD_OLLAMA_MODEL: "${SD_OLLAMA_TIER2_MODEL:-llama3.1:8b}"
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        /bin/ollama serve &
+        pid=$$!
+        until /bin/ollama list >/dev/null 2>&1; do sleep 1; done
+        echo "ollama-tier2: pulling $$SD_OLLAMA_MODEL (no-op if cached)"
+        /bin/ollama pull "$$SD_OLLAMA_MODEL" || echo "ollama-tier2: pull failed, continuing"
+        wait $$pid
+    restart: "no"
+    healthcheck:
+      test: ["CMD", "/bin/ollama", "list"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # ──────────────────────────────────────────────────────────────────────
+  # AirLLM peer LLM service — opt-in via the `airllm-tier2` profile.
+  # Streams model layers from disk per token so 70B-class models run on
+  # consumer hardware. Slower than Ollama (~1-3 tok/s) but enables much
+  # larger models locally. See bridge/airllm/README.md for the contract.
+  #
+  # First start downloads the model from HuggingFace (~24 GB at 4bit
+  # for Llama-3.1-70B; the start_period below allows up to 10 min for
+  # this). The HF cache lives in its own volume so reboots don't re-pull.
+  #
+  # Wave 8c consolidation: the dedicated `airllm-tier3` container was
+  # retired. When a user picks AirLLM at Tier 3, their provider config
+  # points at the same `airllm-tier2` endpoint — one container serves
+  # both nightly_run and research_request workflows. The lifecycle
+  # default for airllm-tier2 (defaultPolicyFor in service_lifecycle.go)
+  # is on_demand_lazy with `warm_for_workflow=["nightly_run",
+  # "research_request"]` so SignalUsed from either workflow keeps it
+  # alive; the 10-min idle reaper stops it when nothing's used it.
+  # ──────────────────────────────────────────────────────────────────────
+
+  airllm-tier2:
+    profiles: ["airllm-tier2"]
+    build:
+      context: ./bridge/airllm
+    image: synaptic-airllm:latest
+    container_name: synaptic-airllm-tier2
+    ports:
+      - "9912:9912"
+    volumes:
+      - airllm-tier2-cache:/root/.cache/huggingface
+    environment:
+      AIRLLM_LISTEN: "0.0.0.0:9912"
+      AIRLLM_MODEL: "${SD_AIRLLM_TIER2_MODEL:-meta-llama/Llama-3.1-70B-Instruct}"
+      AIRLLM_COMPRESSION: "${SD_AIRLLM_TIER2_COMPRESSION:-4bit}"
+      # huggingface_hub reads this automatically. Empty = anonymous,
+      # which works for ungated models. Llama 3.1 + many other defaults
+      # are GATED — to use them:
+      #   1. Visit https://huggingface.co/<model_id> and accept the license
+      #   2. Generate a token at https://huggingface.co/settings/tokens
+      #   3. Set HUGGING_FACE_HUB_TOKEN=hf_... in your .env, then recreate
+      #      this container.
+      HUGGING_FACE_HUB_TOKEN: "${HUGGING_FACE_HUB_TOKEN:-}"
+    # GPU passthrough — AirLLM's 4bit/8bit quantization uses bitsandbytes
+    # which requires CUDA.  This block requests all NVIDIA GPUs on the host;
+    # Docker Desktop (Windows/WSL2) + nvidia-container-toolkit honor it.
+    # On a host with no NVIDIA GPU + driver, compose silently no-ops the
+    # reservation — the container starts but compression=4bit will RuntimeError
+    # on first model load (use compression=none and a small model in that case,
+    # or switch to Ollama Tier 2).
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: "no"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; r=urllib.request.urlopen('http://127.0.0.1:9912/healthz',timeout=3); sys.exit(0 if r.status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 600s   # first-time model pull can take 10+ min
+
+  # ──────────────────────────────────────────────────────────────────────
+  # v2.6 Bundle H — alternative local LLM runtimes (Pi4-compatible).
+  # Both speak OpenAI wire format natively, so they slot into Bundle E's
+  # `custom + local` auto-detect with no proxy layer. Opt-in via profile:
+  #
+  #   docker compose --profile llama-cpp up -d llama-cpp-server
+  #   docker compose --profile localai  up -d localai
+  #
+  # Then wire the runtime as a tier via the "Provider mode B" env-var
+  # block at the top of the `core:` service (or via PUT /settings/
+  # providers/{tier}). Within the synaptic_default network they're
+  # reachable at `http://llama-cpp-server:8080/v1` and
+  # `http://localai:8080/v1` respectively.
+  #
+  # Pi4 8GB sanity check: both default to model preloads ≤ 2 GB so the
+  # full SD Core + Ollama Tier 1 (3B) + one of these runtimes fits in
+  # 6-7 GB headroom. Larger models work but you'll need to drop Tier 1
+  # or run them on a separate host.
+  # ──────────────────────────────────────────────────────────────────────
+  llama-cpp-server:
+    profiles: ["llama-cpp"]
+    # The :server tag is x86; :server-arm64 for Pi4 / Apple Silicon.
+    # Override via `SD_LLAMA_CPP_TAG=server-arm64` in your .env.
+    image: "ghcr.io/ggerganov/llama.cpp:${SD_LLAMA_CPP_TAG:-server}"
+    container_name: synaptic-llama-cpp
+    ports:
+      - "8089:8080"
+    volumes:
+      - llama-cpp-models:/models
+    environment:
+      # Default model: small enough for Pi4 8GB. Override with a
+      # heavier gguf via SD_LLAMA_CPP_MODEL — but mount the host
+      # path that contains it, the container only sees /models.
+      LLAMA_ARG_MODEL: "${SD_LLAMA_CPP_MODEL:-/models/qwen2.5-0.5b-instruct-q4_k_m.gguf}"
+      LLAMA_ARG_PORT:  "8080"
+      LLAMA_ARG_HOST:  "0.0.0.0"
+      # Limit threads so a Pi4 4-core host doesn't get pegged.
+      LLAMA_ARG_THREADS: "${SD_LLAMA_CPP_THREADS:-4}"
+    restart: "no"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:8080/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 120s
+
+  # LocalAI — drop-in OpenAI-compatible aggregator that supports GGUF
+  # + transformers + diffusers. Heavier image than llama.cpp:server but
+  # easier to swap models at runtime via its `/models/apply` API.
+  localai:
+    profiles: ["localai"]
+    # `latest-cpu` is the build for hosts without NVIDIA. For GPU hosts
+    # use the cuda12 variant: `localai/localai:latest-aio-gpu-nvidia-cuda-12`
+    image: "${SD_LOCALAI_IMAGE:-localai/localai:latest-cpu}"
+    container_name: synaptic-localai
+    ports:
+      - "8090:8080"
+    volumes:
+      - localai-models:/build/models
+    environment:
+      # Preload list — comma-separated model ids. Defaults to a Pi4-fit
+      # phi-3-mini. Set SD_LOCALAI_MODELS="phi-3-mini-4k,qwen2.5-0.5b"
+      # to preload multiple.
+      MODELS: "${SD_LOCALAI_MODELS:-phi-3-mini-4k}"
+      DEBUG: "${SD_LOCALAI_DEBUG:-false}"
+      THREADS: "${SD_LOCALAI_THREADS:-4}"
+    restart: "no"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:8080/readyz || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 180s
+
+volumes:
+  # Compose-managed; created on first `up`. Renamed in 2.1.0b1 from
+  # `synaptic-disorder-bank` to drop the "disorder" stem; existing users
+  # with data in the legacy `synaptic_synaptic-disorder-bank` volume can
+  # run the one-time bank migration documented in
+  # `docs/dev/Legacy migration paths.md` § 2.
+  #
+  # Note: in 2.0.1b1 this volume was briefly marked `external: true` to let
+  # the renamed `synaptic` compose project adopt the legacy
+  # `synapticdisorder_synaptic-disorder-bank` volume in place. That broke
+  # fresh installs with "external volume not found" before any service
+  # started — flipped back to compose-managed in 2.0.2b1.
+  synaptic-bank:
+  # Per-tier Ollama volumes. Compose-managed (not external) so they're
+  # created on first `up --profile ollama-tier2` etc. Wave 8c retired
+  # the dedicated Tier 3 containers — a Tier 2 model serves both
+  # nightly_run and research_request locally.
+  ollama-tier1-data:
+  ollama-tier2-data:
+  # v2.7 Bundle P — dedicated nomic-embed-text:v1.5 container volume.
+  ollama-embed-data:
+  # AirLLM HuggingFace cache. Holds the streamed model weights; survives
+  # `compose down` so the 24-200 GB download isn't redone on container
+  # recreate. Wave 8c: only the Tier 2 cache remains.
+  airllm-tier2-cache:
+  # v2.6 Bundle H — model caches for the alternative local runtimes.
+  # Created on first `--profile llama-cpp / localai up`.
+  llama-cpp-models:
+  localai-models:

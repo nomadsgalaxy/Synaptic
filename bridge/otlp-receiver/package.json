@@ -1,0 +1,15 @@
+{
+  "name": "synaptic-otlp-receiver",
+  "version": "0.1.0",
+  "description": "OTLP/HTTP trace receiver — translates OpenInference AI spans to Synaptic brain events",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": ["opentelemetry", "otlp", "openinference", "synaptic", "observability"],
+  "license": "SEE LICENSE IN ../../LICENSE"
+}

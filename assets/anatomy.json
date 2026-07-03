@@ -1,0 +1,324 @@
+{
+  "regions": {
+    "prefrontal_cortex": {
+      "name": "Prefrontal Cortex",
+      "function": "Agent orchestration & planning",
+      "center": [
+        0.0,
+        0.4,
+        0.95
+      ],
+      "radius": 0.25,
+      "fire_color": "fireRecall",
+      "tag_patterns": [
+        "agent",
+        "subagent",
+        "workflow",
+        "orchestration",
+        "planning",
+        "design-decision",
+        "decision",
+        "ai-cascade"
+      ]
+    },
+    "frontal_lobe": {
+      "name": "Frontal Lobe",
+      "function": "Language, personality, decisions",
+      "center": [
+        0.0,
+        0.3,
+        0.75
+      ],
+      "radius": 0.3,
+      "fire_color": "fireRecall",
+      "tag_patterns": [
+        "feedback",
+        "directive",
+        "user-profile",
+        "personality",
+        "preferences",
+        "feature",
+        "purpose",
+        "overview",
+        "project"
+      ]
+    },
+    "broca_area": {
+      "name": "Broca's Area",
+      "function": "Response generation (speech production)",
+      "center": [
+        -0.55,
+        0.1,
+        0.55
+      ],
+      "radius": 0.16,
+      "fire_color": "fireResponse",
+      "tag_patterns": [
+        "output",
+        "response",
+        "writing",
+        "summary",
+        "documentation",
+        "docs"
+      ]
+    },
+    "wernicke_area": {
+      "name": "Wernicke's Area",
+      "function": "Prompt comprehension (language input)",
+      "center": [
+        -0.65,
+        0.1,
+        -0.2
+      ],
+      "radius": 0.16,
+      "fire_color": "fireResponse",
+      "tag_patterns": [
+        "prompt",
+        "intent",
+        "parsing",
+        "comprehension"
+      ]
+    },
+    "visual_cortex": {
+      "name": "Visual Cortex",
+      "function": "Web, screenshots, UI processing",
+      "center": [
+        0.0,
+        0.0,
+        -0.95
+      ],
+      "radius": 0.32,
+      "fire_color": "neuronIdle",
+      "tag_patterns": [
+        "screenshot",
+        "chrome-mcp",
+        "ui",
+        "ux",
+        "visual",
+        "image",
+        "web",
+        "browser",
+        "browser-extension",
+        "obs-websocket",
+        "vdo-ninja",
+        "react",
+        "html",
+        "css",
+        "opencascade",
+        "positron3d",
+        "3d",
+        "cad"
+      ]
+    },
+    "temporal_lobe_left": {
+      "name": "Temporal Lobe (L)",
+      "function": "Long-term memory, knowledge, audio",
+      "center": [
+        -0.85,
+        -0.15,
+        0.05
+      ],
+      "radius": 0.22,
+      "fire_color": "neuronIdle",
+      "tag_patterns": [
+        "memory_type:fact",
+        "memory_type:rule",
+        "memory_type:procedure",
+        "reference",
+        "knowledge",
+        "music",
+        "audio"
+      ]
+    },
+    "temporal_lobe_right": {
+      "name": "Temporal Lobe (R)",
+      "function": "Long-term memory, knowledge, audio",
+      "center": [
+        0.85,
+        -0.15,
+        0.05
+      ],
+      "radius": 0.22,
+      "fire_color": "neuronIdle",
+      "tag_patterns": [
+        "memory_type:fact",
+        "memory_type:rule",
+        "memory_type:procedure",
+        "reference",
+        "knowledge",
+        "music",
+        "audio"
+      ]
+    },
+    "hippocampus": {
+      "name": "Hippocampus",
+      "function": "Memory consolidation (Hindsight itself)",
+      "center": [
+        0.0,
+        -0.25,
+        0.0
+      ],
+      "radius": 0.16,
+      "fire_color": "fireRecall",
+      "tag_patterns": [
+        "consolidated",
+        "mental-model",
+        "bank",
+        "hindsight",
+        "memory"
+      ]
+    },
+    "parietal_lobe": {
+      "name": "Parietal Lobe",
+      "function": "Code, architecture, spatial reasoning",
+      "center": [
+        0.0,
+        0.65,
+        -0.3
+      ],
+      "radius": 0.32,
+      "fire_color": "neuronIdle",
+      "tag_patterns": [
+        "architecture",
+        "tech-stack",
+        "repo-layout",
+        "code",
+        "system-design",
+        "math",
+        "logic",
+        "data",
+        "config",
+        "config-schema",
+        "schema",
+        "tech",
+        "stack"
+      ]
+    },
+    "motor_cortex": {
+      "name": "Motor Cortex",
+      "function": "Tool execution, MCP calls",
+      "center": [
+        0.0,
+        0.55,
+        -0.05
+      ],
+      "radius": 0.22,
+      "fire_color": "fireTool",
+      "tag_patterns": [
+        "tool",
+        "mcp",
+        "bash",
+        "exec",
+        "action",
+        "deployment",
+        "operations",
+        "setup",
+        "github",
+        "rate-limiting",
+        "cli",
+        "cloudflare",
+        "docker"
+      ]
+    },
+    "cerebellum": {
+      "name": "Cerebellum",
+      "function": "Coordination, fine-motor (testing/auth)",
+      "center": [
+        0.0,
+        -0.45,
+        -0.65
+      ],
+      "radius": 0.26,
+      "fire_color": "fireTool",
+      "tag_patterns": [
+        "testing",
+        "ci",
+        "test",
+        "coordination",
+        "auth"
+      ]
+    },
+    "amygdala": {
+      "name": "Amygdala",
+      "function": "Errors, warnings, gotchas",
+      "center": [
+        0.0,
+        -0.3,
+        0.4
+      ],
+      "radius": 0.14,
+      "fire_color": "fireError",
+      "tag_patterns": [
+        "error",
+        "gotcha",
+        "incident",
+        "warning",
+        "bug",
+        "bugfix"
+      ]
+    },
+    "corpus_callosum": {
+      "name": "Corpus Callosum",
+      "function": "Inter-agent and inter-system bridges",
+      "center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius": 0.1,
+      "fire_color": "fireTool",
+      "tag_patterns": [
+        "slack",
+        "discord-bridge",
+        "bridge",
+        "coordination",
+        "inter-agent",
+        "mitmproxy",
+        "phoenix-tracer",
+        "observability",
+        "ai-tooling"
+      ]
+    },
+    "brain_stem": {
+      "name": "Brain Stem",
+      "function": "Generation, imagination, dreams",
+      "center": [
+        0.0,
+        -0.65,
+        -0.2
+      ],
+      "radius": 0.18,
+      "fire_color": "fireRecall",
+      "tag_patterns": [
+        "creative",
+        "generation",
+        "imagination",
+        "art",
+        "dream"
+      ]
+    }
+  },
+  "brain_mesh_bbox": {
+    "min": [
+      135.6448974609375,
+      -88.92860412597656,
+      131.0856475830078
+    ],
+    "max": [
+      313.6448974609375,
+      47.07139587402344,
+      274.08514404296875
+    ],
+    "center": [
+      230.4564666748047,
+      -26.205724716186523,
+      202.29330444335938
+    ]
+  },
+  "coordinate_system": {
+    "x": "left(-) to right(+)",
+    "y": "inferior(-) to superior(+)",
+    "z": "posterior(-) to anterior(+)",
+    "note": "Region centers are in unit-cube coords; renderer normalizes brain mesh to fit."
+  }
+}

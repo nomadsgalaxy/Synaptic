@@ -1,0 +1,34 @@
+# Run JUST Synaptic Core in a container (dev mode), sharing the
+# project's assets/ folder so the memory watcher sees the same files the
+# dashboard reads.
+#
+#   docker compose up --build
+#   docker compose logs -f
+#   docker compose down
+#
+# For the full stack (core + dashboard, zero host installs), use the
+# release-mode compose at the repo root:
+#   cd ../..  &&  docker compose up
+
+services:
+  core:
+    build: .
+    image: synaptic-disorder/core:latest
+    container_name: synaptic-disorder-core
+    ports:
+      - "9911:9911"
+    volumes:
+      # Mount the project root inside the container so /data/assets/* are
+      # the same files the dashboard's serve.py serves, and so the SQLite
+      # fallback bank persists at <repo>/sd_bank.db on the host.
+      - ../../:/data
+    environment:
+      SD_CORE_LISTEN: "0.0.0.0:9911"
+      SD_DATA_DIR: "/data"
+      SD_RING_SIZE: "1000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:9911/healthz | grep -q ok"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

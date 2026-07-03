@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "comment": "Defaults for bridge/hermes-plugin/forward.js. Override via SD_CORE_URL / SD_API_TOKEN env vars; this file is informational and not currently read by forward.js (kept for parity with the gemini/claude-code plugins which DO use a config file). Edit forward.js's TOOL_REGION map directly if you want to tweak tool→region mappings.",
+  "sd_core_url": "http://localhost:9911",
+  "sd_api_token": "",
+  "adapter_id": "hermes-hooks",
+  "tool_region_map": {
+    "read_file": "visual_cortex",
+    "list_files": "parietal_lobe",
+    "grep": "parietal_lobe",
+    "glob": "parietal_lobe",
+    "write_file": "broca_area",
+    "edit_file": "motor_cortex",
+    "multi_edit": "motor_cortex",
+    "terminal": "motor_cortex",
+    "bash": "motor_cortex",
+    "shell": "motor_cortex",
+    "web_fetch": "temporal_lobe_left",
+    "web_search": "temporal_lobe_left",
+    "task": "prefrontal_cortex",
+    "plan": "prefrontal_cortex",
+    "notebook_edit": "motor_cortex"
+  },
+  "muninn_region_from_tag": {
+    "user": "frontal_lobe",
+    "identity": "frontal_lobe",
+    "feedback": "amygdala",
+    "emotion": "amygdala",
+    "project": "prefrontal_cortex",
+    "planning": "prefrontal_cortex",
+    "reference": "corpus_callosum",
+    "doc": "corpus_callosum",
+    "default": "hippocampus"
+  }
+}

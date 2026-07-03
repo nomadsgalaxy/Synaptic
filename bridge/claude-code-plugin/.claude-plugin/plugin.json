@@ -1,0 +1,33 @@
+{
+  "name": "synaptic-claude-code",
+  "version": "0.5.0",
+  "description": "Two-way live-memory bridge to the Synaptic dashboard. v0.5.0 adds: (1) sd_pin_memory MCP tool + /sd-pin slash command for user-curated ground-truth memories (protected from dedup/decay, top-priority Phase 0b); (2) Stop hook now reads assistant text from transcript_path and ships it as response_complete with real content (was placeholder pulses only); (3) opt-in per-turn recall injection (SD_RECALL_INJECT=1) prepends top-K bank matches to every UserPromptSubmit. Existing hooks unchanged: SessionStart/End, UserPromptSubmit, PreToolUse, PostToolUse, SubagentStop, Stop. Bundled MCP server exposes 19 tools (added sd_pin_memory).",
+  "author": {
+    "name": "Anthony Dragone",
+    "url": "https://github.com/nomadsgalaxy"
+  },
+  "homepage": "https://github.com/nomadsgalaxy/Synaptic-Disorder",
+  "keywords": [
+    "observability",
+    "dashboard",
+    "visualization",
+    "synaptic",
+    "memory",
+    "mcp"
+  ],
+  "hooks": "./.claude-plugin/hooks.json",
+  "commands": "./commands",
+  "mcpServers": {
+    "synaptic": {
+      "command": "node",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/../mcp-adapter/index.js"
+      ],
+      "env": {
+        "SD_CLIENT": "claude-code",
+        "SD_ADAPTER_ID": "claude-code-mcp",
+        "SD_CORE_URL": "http://localhost:9911"
+      }
+    }
+  }
+}

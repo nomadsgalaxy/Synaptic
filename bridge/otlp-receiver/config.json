@@ -1,0 +1,5 @@
+{
+  "SD_CORE_URL": "http://localhost:9911",
+  "SD_API_TOKEN": "",
+  "OTLP_PORT": "4318"
+}

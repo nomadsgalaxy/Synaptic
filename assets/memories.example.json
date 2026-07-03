@@ -1,0 +1,3091 @@
+{
+  "items": [
+    {
+      "id": "synth-fdcfa71ac243",
+      "text": "AI cascade: classifier first, then generator, then verifier.",
+      "tags": [
+        "agent",
+        "ai-cascade",
+        "prefrontal",
+        "synthetic"
+      ],
+      "region": "prefrontal_cortex",
+      "pos": [
+        0.16540540754795074,
+        -0.305540531873703,
+        0.12635135650634766
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-05-06T18:04:38+00:00Z",
+      "created_at": "2026-05-06T18:04:38+00:00Z"
+    },
+    {
+      "id": "synth-70659fb5d501",
+      "text": "Decided against splitting the monolith this quarter \u2014 too much in flight.",
+      "tags": [
+        "decision",
+        "prefrontal",
+        "synthetic"
+      ],
+      "region": "prefrontal_cortex",
+      "pos": [
+        0.08729729801416397,
+        -0.3606756627559662,
+        0.6409459710121155
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-29T04:04:38+00:00Z",
+      "created_at": "2026-04-29T04:04:38+00:00Z"
+    },
+    {
+      "id": "synth-3ff6bc6deec4",
+      "text": "Workflow update: PR review now blocks merge until tests pass.",
+      "tags": [
+        "prefrontal",
+        "process",
+        "synthetic",
+        "workflow"
+      ],
+      "region": "prefrontal_cortex",
+      "pos": [
+        0.07351351529359818,
+        -0.38824325799942017,
+        0.006891891825944185
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-05-06T03:04:38+00:00Z",
+      "created_at": "2026-05-06T03:04:38+00:00Z"
+    },
+    {
+      "id": "synth-05b30eb2148b",
+      "text": "New agent role: 'auditor' \u2014 read-only, scans for inconsistencies.",
+      "tags": [
+        "agent",
+        "prefrontal",
+        "synthetic"
+      ],
+      "region": "prefrontal_cortex",
+      "pos": [
+        0.42729729413986206,
+        0.2641891837120056,
+        0.16770270466804504
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-14T00:04:38+00:00Z",
+      "created_at": "2026-04-14T00:04:38+00:00Z"
+    },
+    {
+      "id": "synth-eaa3450d815e",
+      "text": "Subagent budget should cap at 3 levels deep to avoid runaway costs.",
+      "tags": [
+        "prefrontal",
+        "subagent",
+        "synthetic"
+      ],
+      "region": "prefrontal_cortex",
+      "pos": [
+        -0.19297297298908234,
+        -0.21824324131011963,
+        -0.5398648381233215
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-23T13:04:38+00:00Z",
+      "created_at": "2026-04-23T13:04:38+00:00Z"
+    },
+    {
+      "id": "synth-a47ee9bf6c7d",
+      "text": "Plan for next sprint: focus on perf, defer feature work to Q3.",
+      "tags": [
+        "planning",
+        "prefrontal",
+        "synthetic"
+      ],
+      "region": "prefrontal_cortex",
+      "pos": [
+        0.47783783078193665,
+        0.02986486442387104,
+        -0.5214864611625671
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-18T12:04:38+00:00Z",
+      "created_at": "2026-04-18T12:04:38+00:00Z"
+    },
+    {
+      "id": "synth-c9b6e4bd4486",
+      "text": "Workflow improvement: schedule weekly architecture sync.",
+      "tags": [
+        "prefrontal",
+        "synthetic",
+        "workflow"
+      ],
+      "region": "prefrontal_cortex",
+      "pos": [
+        0.24810810387134552,
+        -0.2733783721923828,
+        0.14013513922691345
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-12T15:04:38+00:00Z",
+      "created_at": "2026-04-12T15:04:38+00:00Z"
+    },
+    {
+      "id": "synth-28f146947056",
+      "text": "Architectural decision: prefer event sourcing for audit trail traceability.",
+      "tags": [
+        "design-decision",
+        "prefrontal",
+        "synthetic"
+      ],
+      "region": "prefrontal_cortex",
+      "pos": [
+        -0.2940540611743927,
+        0.2549999952316284,
+        -0.5077027082443237
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-26T12:04:38+00:00Z",
+      "created_at": "2026-04-26T12:04:38+00:00Z"
+    },
+    {
+      "id": "synth-c3f3b1927507",
+      "text": "Orchestration plan: kick off DB migration, then deploy worker, then app.",
+      "tags": [
+        "orchestration",
+        "prefrontal",
+        "synthetic"
+      ],
+      "region": "prefrontal_cortex",
+      "pos": [
+        -0.06891892105340958,
+        -0.3606756627559662,
+        0.7098648548126221
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-30T10:04:38+00:00Z",
+      "created_at": "2026-04-30T10:04:38+00:00Z"
+    },
+    {
+      "id": "synth-b199811d2cf5",
+      "text": "Decided to use a feature flag for the new payment flow rollout.",
+      "tags": [
+        "decision",
+        "prefrontal",
+        "rollout",
+        "synthetic"
+      ],
+      "region": "prefrontal_cortex",
+      "pos": [
+        -0.40432432293891907,
+        0.41121622920036316,
+        -0.42040541768074036
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-05-04T08:04:38+00:00Z",
+      "created_at": "2026-05-04T08:04:38+00:00Z"
+    },
+    {
+      "id": "synth-19fbcd97dbbe",
+      "text": "Subagent spawn pattern: planner \u2192 researcher \u2192 executor with bounded retries.",
+      "tags": [
+        "agent",
+        "prefrontal",
+        "subagent",
+        "synthetic"
+      ],
+      "region": "prefrontal_cortex",
+      "pos": [
+        -0.5283783674240112,
+        -0.020675675943493843,
+        0.12175675481557846
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-25T09:04:38+00:00Z",
+      "created_at": "2026-04-25T09:04:38+00:00Z"
+    },
+    {
+      "id": "synth-733f7f15090b",
+      "text": "Decision log: rolled back the new caching layer; revisit in two weeks.",
+      "tags": [
+        "decision",
+        "prefrontal",
+        "synthetic"
+      ],
+      "region": "prefrontal_cortex",
+      "pos": [
+        -0.05972972884774208,
+        -0.3698648512363434,
+        -0.19067567586898804
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-28T19:04:38+00:00Z",
+      "created_at": "2026-04-28T19:04:38+00:00Z"
+    },
+    {
+      "id": "synth-7ced95aa4456",
+      "text": "Project: documentation site rebuild \u2014 starts after current sprint.",
+      "tags": [
+        "frontal",
+        "project",
+        "synthetic"
+      ],
+      "region": "frontal_lobe",
+      "pos": [
+        0.24810810387134552,
+        -0.3101351261138916,
+        0.07581081241369247
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-05-04T23:04:38+00:00Z",
+      "created_at": "2026-05-04T23:04:38+00:00Z"
+    },
+    {
+      "id": "synth-2c86790410c7",
+      "text": "Directive: feature work pauses during incident windows.",
+      "tags": [
+        "directive",
+        "frontal",
+        "synthetic"
+      ],
+      "region": "frontal_lobe",
+      "pos": [
+        0.18837837874889374,
+        0.21364864706993103,
+        0.48013514280319214
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-12T11:04:38+00:00Z",
+      "created_at": "2026-04-12T11:04:38+00:00Z"
+    },
+    {
+      "id": "synth-d3513b07d766",
+      "text": "Personality note: prefers async chat over synchronous meetings.",
+      "tags": [
+        "frontal",
+        "personality",
+        "preferences",
+        "synthetic"
+      ],
+      "region": "frontal_lobe",
+      "pos": [
+        0.6294594407081604,
+        0.03905405476689339,
+        -0.14013513922691345
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-09T13:04:38+00:00Z",
+      "created_at": "2026-04-09T13:04:38+00:00Z"
+    },
+    {
+      "id": "synth-c1e22ff96560",
+      "text": "Feature roadmap: dark mode, then keyboard shortcuts, then mobile polish.",
+      "tags": [
+        "feature",
+        "frontal",
+        "project",
+        "synthetic"
+      ],
+      "region": "frontal_lobe",
+      "pos": [
+        0.5927026867866516,
+        0.3239189088344574,
+        -0.12175675481557846
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-24T12:04:38+00:00Z",
+      "created_at": "2026-04-24T12:04:38+00:00Z"
+    },
+    {
+      "id": "synth-3d18301cc5d5",
+      "text": "Feedback: code reviews should focus on intent, not style nits.",
+      "tags": [
+        "feedback",
+        "frontal",
+        "synthetic"
+      ],
+      "region": "frontal_lobe",
+      "pos": [
+        -0.18378378450870514,
+        -0.24121621251106262,
+        -0.6547297239303589
+      ],
+      "degree": 12,
+      "mentioned_at": "2026-04-16T09:04:38+00:00Z",
+      "created_at": "2026-04-16T09:04:38+00:00Z"
+    },
+    {
+      "id": "synth-c491b3c4304d",
+      "text": "Directive: never auto-merge without human review on production branches.",
+      "tags": [
+        "directive",
+        "frontal",
+        "synthetic"
+      ],
+      "region": "frontal_lobe",
+      "pos": [
+        0.3537837862968445,
+        0.016081081703305244,
+        0.5904054045677185
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-25T09:04:38+00:00Z",
+      "created_at": "2026-04-25T09:04:38+00:00Z"
+    },
+    {
+      "id": "synth-d21dc2a924a9",
+      "text": "User profile: prefers terse, technical explanations over verbose ones.",
+      "tags": [
+        "frontal",
+        "preferences",
+        "synthetic",
+        "user-profile"
+      ],
+      "region": "frontal_lobe",
+      "pos": [
+        -0.43189188838005066,
+        0.12175675481557846,
+        0.19986486434936523
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-15T12:04:38+00:00Z",
+      "created_at": "2026-04-15T12:04:38+00:00Z"
+    },
+    {
+      "id": "synth-aa29841b8687",
+      "text": "Project purpose: replace the legacy invoice system before Q4.",
+      "tags": [
+        "frontal",
+        "project",
+        "purpose",
+        "synthetic"
+      ],
+      "region": "frontal_lobe",
+      "pos": [
+        0.15621621906757355,
+        -0.2733783721923828,
+        0.06202702596783638
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-17T00:04:38+00:00Z",
+      "created_at": "2026-04-17T00:04:38+00:00Z"
+    },
+    {
+      "id": "synth-3fc0c02d4acc",
+      "text": "Project overview: portfolio site rebuild, targeting February 2026.",
+      "tags": [
+        "frontal",
+        "overview",
+        "project",
+        "synthetic"
+      ],
+      "region": "frontal_lobe",
+      "pos": [
+        0.5054054260253906,
+        -0.13094595074653625,
+        0.2549999952316284
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-18T21:04:38+00:00Z",
+      "created_at": "2026-04-18T21:04:38+00:00Z"
+    },
+    {
+      "id": "synth-6c890544666e",
+      "text": "Feedback loop: monthly retro every first Friday.",
+      "tags": [
+        "feedback",
+        "frontal",
+        "synthetic"
+      ],
+      "region": "frontal_lobe",
+      "pos": [
+        0.13783784210681915,
+        0.44337838888168335,
+        0.2549999952316284
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-05-01T06:04:38+00:00Z",
+      "created_at": "2026-05-01T06:04:38+00:00Z"
+    },
+    {
+      "id": "synth-1168979b4259",
+      "text": "Personal preference: tabs for code, spaces for prose markdown.",
+      "tags": [
+        "frontal",
+        "preferences",
+        "synthetic"
+      ],
+      "region": "frontal_lobe",
+      "pos": [
+        -0.3675675690174103,
+        -0.259594589471817,
+        -0.6363513469696045
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-28T00:04:38+00:00Z",
+      "created_at": "2026-04-28T00:04:38+00:00Z"
+    },
+    {
+      "id": "synth-5a041fd24898",
+      "text": "Personal note: morning hours are deep-work time, no meetings before 11.",
+      "tags": [
+        "frontal",
+        "personality",
+        "synthetic"
+      ],
+      "region": "frontal_lobe",
+      "pos": [
+        -0.39054054021835327,
+        -0.2733783721923828,
+        -0.5122972726821899
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-28T23:04:38+00:00Z",
+      "created_at": "2026-04-28T23:04:38+00:00Z"
+    },
+    {
+      "id": "synth-cfd96323d28f",
+      "text": "Output format: prefer markdown tables for tabular data.",
+      "tags": [
+        "broca",
+        "output",
+        "synthetic",
+        "writing"
+      ],
+      "region": "broca_area",
+      "pos": [
+        0.3491891920566559,
+        -0.18148648738861084,
+        0.3652702569961548
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-16T05:04:38+00:00Z",
+      "created_at": "2026-04-16T05:04:38+00:00Z"
+    },
+    {
+      "id": "synth-b5cc9def4a2a",
+      "text": "Response style guide: avoid hedging, use concrete examples.",
+      "tags": [
+        "broca",
+        "response",
+        "synthetic"
+      ],
+      "region": "broca_area",
+      "pos": [
+        -0.3445945978164673,
+        0.020675675943493843,
+        -0.45716217160224915
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-08T00:04:38+00:00Z",
+      "created_at": "2026-04-08T00:04:38+00:00Z"
+    },
+    {
+      "id": "synth-7872a88ba5dd",
+      "text": "Documentation gap: no migration guide for v2 \u2192 v3 yet.",
+      "tags": [
+        "broca",
+        "documentation",
+        "synthetic"
+      ],
+      "region": "broca_area",
+      "pos": [
+        -0.40891891717910767,
+        -0.12635135650634766,
+        -0.5352702736854553
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-05-02T12:04:38+00:00Z",
+      "created_at": "2026-05-02T12:04:38+00:00Z"
+    },
+    {
+      "id": "synth-a1705d51a43a",
+      "text": "Response template: lead with the answer, supporting context after.",
+      "tags": [
+        "broca",
+        "response",
+        "synthetic",
+        "writing"
+      ],
+      "region": "broca_area",
+      "pos": [
+        -0.3767567574977875,
+        0.42040541768074036,
+        -0.11716216057538986
+      ],
+      "degree": 8,
+      "mentioned_at": "2026-04-28T21:04:38+00:00Z",
+      "created_at": "2026-04-28T21:04:38+00:00Z"
+    },
+    {
+      "id": "synth-be2fb2a9f26f",
+      "text": "Summary email goes out Friday EOD; draft by Thursday.",
+      "tags": [
+        "broca",
+        "summary",
+        "synthetic",
+        "writing"
+      ],
+      "region": "broca_area",
+      "pos": [
+        -0.22972972691059113,
+        -0.21364864706993103,
+        -0.7006756663322449
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-19T12:04:38+00:00Z",
+      "created_at": "2026-04-19T12:04:38+00:00Z"
+    },
+    {
+      "id": "synth-f36326fecbfd",
+      "text": "Documentation refresh: API reference now uses OpenAPI 3.1.",
+      "tags": [
+        "broca",
+        "docs",
+        "documentation",
+        "synthetic"
+      ],
+      "region": "broca_area",
+      "pos": [
+        -0.23432432115077972,
+        0.20905405282974243,
+        -0.5904054045677185
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-23T02:04:38+00:00Z",
+      "created_at": "2026-04-23T02:04:38+00:00Z"
+    },
+    {
+      "id": "synth-5f282c607a5d",
+      "text": "Output style: short paragraphs, \u22644 sentences each, no bullet stacks.",
+      "tags": [
+        "broca",
+        "output",
+        "synthetic"
+      ],
+      "region": "broca_area",
+      "pos": [
+        0.07351351529359818,
+        0.09878378361463547,
+        -0.7328378558158875
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-25T13:04:38+00:00Z",
+      "created_at": "2026-04-25T13:04:38+00:00Z"
+    },
+    {
+      "id": "synth-20c7b3029a8a",
+      "text": "Docs: added a worked example for the bulk-import endpoint.",
+      "tags": [
+        "broca",
+        "docs",
+        "synthetic"
+      ],
+      "region": "broca_area",
+      "pos": [
+        0.07810810953378677,
+        0.5352702736854553,
+        -0.2917567491531372
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-20T05:04:38+00:00Z",
+      "created_at": "2026-04-20T05:04:38+00:00Z"
+    },
+    {
+      "id": "synth-044598f7318b",
+      "text": "Drafted the Q2 wrap-up post; needs one more edit pass.",
+      "tags": [
+        "broca",
+        "synthetic",
+        "writing"
+      ],
+      "region": "broca_area",
+      "pos": [
+        0.39513513445854187,
+        -0.305540531873703,
+        -0.08040540665388107
+      ],
+      "degree": 8,
+      "mentioned_at": "2026-04-12T19:04:38+00:00Z",
+      "created_at": "2026-04-12T19:04:38+00:00Z"
+    },
+    {
+      "id": "synth-4d6a3e007406",
+      "text": "Summary: 12 PRs merged, 4 incidents resolved, 3 features shipped this week.",
+      "tags": [
+        "broca",
+        "summary",
+        "synthetic"
+      ],
+      "region": "broca_area",
+      "pos": [
+        0.03216216340661049,
+        0.16310811042785645,
+        -0.3836486339569092
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-05-02T00:04:38+00:00Z",
+      "created_at": "2026-05-02T00:04:38+00:00Z"
+    },
+    {
+      "id": "synth-0d2605763fa1",
+      "text": "Drafted release notes for v3.2 \u2014 ship Tuesday morning.",
+      "tags": [
+        "broca",
+        "output",
+        "synthetic",
+        "writing"
+      ],
+      "region": "broca_area",
+      "pos": [
+        -0.3400000035762787,
+        0.42500001192092896,
+        -0.06202702596783638
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-10T23:04:38+00:00Z",
+      "created_at": "2026-04-10T23:04:38+00:00Z"
+    },
+    {
+      "id": "synth-961487bf1005",
+      "text": "Wrote the onboarding doc \u2014 point new hires at it day one.",
+      "tags": [
+        "broca",
+        "docs",
+        "synthetic",
+        "writing"
+      ],
+      "region": "broca_area",
+      "pos": [
+        -0.14702703058719635,
+        0.11716216057538986,
+        -0.7695946097373962
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-17T18:04:38+00:00Z",
+      "created_at": "2026-04-17T18:04:38+00:00Z"
+    },
+    {
+      "id": "synth-4e97ebe1d25b",
+      "text": "Prompt drift: long sessions accumulate context that confuses parsing.",
+      "tags": [
+        "parsing",
+        "prompt",
+        "synthetic",
+        "wernicke"
+      ],
+      "region": "wernicke_area",
+      "pos": [
+        0.47783783078193665,
+        0.08959459513425827,
+        -0.43418920040130615
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-27T07:04:38+00:00Z",
+      "created_at": "2026-04-27T07:04:38+00:00Z"
+    },
+    {
+      "id": "synth-86652ab8bd9c",
+      "text": "Comprehension fail: user said 'fast' \u2014 meant low-latency, not throughput.",
+      "tags": [
+        "comprehension",
+        "intent",
+        "synthetic",
+        "wernicke"
+      ],
+      "region": "wernicke_area",
+      "pos": [
+        -0.06891892105340958,
+        -0.10337837785482407,
+        0.6087837815284729
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-22T20:04:38+00:00Z",
+      "created_at": "2026-04-22T20:04:38+00:00Z"
+    },
+    {
+      "id": "synth-83f6c6e546f9",
+      "text": "User intent: 'clean up the dashboard' usually means visual decluttering.",
+      "tags": [
+        "intent",
+        "synthetic",
+        "wernicke"
+      ],
+      "region": "wernicke_area",
+      "pos": [
+        -0.19297297298908234,
+        -0.23662161827087402,
+        0.19527027010917664
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-20T15:04:38+00:00Z",
+      "created_at": "2026-04-20T15:04:38+00:00Z"
+    },
+    {
+      "id": "synth-f72766a6a92d",
+      "text": "Intent classifier needs an 'unsure' bucket \u2014 silent fail is worse than ask.",
+      "tags": [
+        "intent",
+        "parsing",
+        "synthetic",
+        "wernicke"
+      ],
+      "region": "wernicke_area",
+      "pos": [
+        -0.3354054093360901,
+        -0.14013513922691345,
+        -0.6960811018943787
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-05-03T00:04:38+00:00Z",
+      "created_at": "2026-05-03T00:04:38+00:00Z"
+    },
+    {
+      "id": "synth-ae84ca32e7f8",
+      "text": "Comprehension issue: ambiguous pronouns in long prompts.",
+      "tags": [
+        "comprehension",
+        "synthetic",
+        "wernicke"
+      ],
+      "region": "wernicke_area",
+      "pos": [
+        -0.44567567110061646,
+        -0.15391892194747925,
+        0.45256757736206055
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-10T00:04:38+00:00Z",
+      "created_at": "2026-04-10T00:04:38+00:00Z"
+    },
+    {
+      "id": "synth-14d923d87392",
+      "text": "Prompt parsing: split intent from constraints, handle each separately.",
+      "tags": [
+        "parsing",
+        "prompt",
+        "synthetic",
+        "wernicke"
+      ],
+      "region": "wernicke_area",
+      "pos": [
+        -0.11027026921510696,
+        -0.12635135650634766,
+        -0.46635136008262634
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-17T14:04:38+00:00Z",
+      "created_at": "2026-04-17T14:04:38+00:00Z"
+    },
+    {
+      "id": "synth-bf91ea37be85",
+      "text": "Intent inference: 'simpler' usually means fewer dependencies, not less code.",
+      "tags": [
+        "intent",
+        "synthetic",
+        "wernicke"
+      ],
+      "region": "wernicke_area",
+      "pos": [
+        -0.009189189411699772,
+        0.3652702569961548,
+        0.3193243145942688
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-25T15:04:38+00:00Z",
+      "created_at": "2026-04-25T15:04:38+00:00Z"
+    },
+    {
+      "id": "synth-0ce8540fe021",
+      "text": "Prompt patterns: 'make it work' \u2192 focus on correctness over polish.",
+      "tags": [
+        "intent",
+        "prompt",
+        "synthetic",
+        "wernicke"
+      ],
+      "region": "wernicke_area",
+      "pos": [
+        -0.3308108150959015,
+        -0.05743243172764778,
+        -0.5628378391265869
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-12T04:04:38+00:00Z",
+      "created_at": "2026-04-12T04:04:38+00:00Z"
+    },
+    {
+      "id": "synth-17dded6adaf9",
+      "text": "Prompt template for bug reports needs reproduction steps required.",
+      "tags": [
+        "prompt",
+        "synthetic",
+        "wernicke"
+      ],
+      "region": "wernicke_area",
+      "pos": [
+        0.18837837874889374,
+        -0.305540531873703,
+        0.14932432770729065
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-17T10:04:38+00:00Z",
+      "created_at": "2026-04-17T10:04:38+00:00Z"
+    },
+    {
+      "id": "synth-cbdb99506cab",
+      "text": "Comprehension: user's 'soon' typically means 'within the week'.",
+      "tags": [
+        "comprehension",
+        "synthetic",
+        "wernicke"
+      ],
+      "region": "wernicke_area",
+      "pos": [
+        0.2710810899734497,
+        -0.02986486442387104,
+        -0.6868919134140015
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-05-06T17:04:38+00:00Z",
+      "created_at": "2026-05-06T17:04:38+00:00Z"
+    },
+    {
+      "id": "synth-8940410a5b90",
+      "text": "Intent shift detected mid-session: switched from debug to feature work.",
+      "tags": [
+        "intent",
+        "synthetic",
+        "wernicke"
+      ],
+      "region": "wernicke_area",
+      "pos": [
+        0.3400000035762787,
+        -0.20445945858955383,
+        -0.5720270276069641
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-08T11:04:38+00:00Z",
+      "created_at": "2026-04-08T11:04:38+00:00Z"
+    },
+    {
+      "id": "synth-731bd4f5547f",
+      "text": "Parsing rule: dates without years default to current year, not next.",
+      "tags": [
+        "parsing",
+        "synthetic",
+        "wernicke"
+      ],
+      "region": "wernicke_area",
+      "pos": [
+        0.08729729801416397,
+        -0.3652702569961548,
+        0.3652702569961548
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-05-05T13:04:38+00:00Z",
+      "created_at": "2026-05-05T13:04:38+00:00Z"
+    },
+    {
+      "id": "synth-65acabe56a65",
+      "text": "Dashboard chart needs better contrast \u2014 current palette fails WCAG AA.",
+      "tags": [
+        "synthetic",
+        "ui",
+        "ux",
+        "visual"
+      ],
+      "region": "visual_cortex",
+      "pos": [
+        -0.09648648649454117,
+        0.05743243172764778,
+        -0.7649999856948853
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-05-01T12:04:38+00:00Z",
+      "created_at": "2026-05-01T12:04:38+00:00Z"
+    },
+    {
+      "id": "synth-106a113c353b",
+      "text": "React component refactor: split the modal into header / body / footer slots.",
+      "tags": [
+        "react",
+        "synthetic",
+        "ui",
+        "visual"
+      ],
+      "region": "visual_cortex",
+      "pos": [
+        0.11486486345529556,
+        -0.18608108162879944,
+        -0.7236486673355103
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-09T01:04:38+00:00Z",
+      "created_at": "2026-04-09T01:04:38+00:00Z"
+    },
+    {
+      "id": "synth-8dd1dbc97d6d",
+      "text": "Browser-extension popup overflows on 1366\u00d7768 \u2014 fixed with max-width.",
+      "tags": [
+        "browser-extension",
+        "css",
+        "synthetic",
+        "visual"
+      ],
+      "region": "visual_cortex",
+      "pos": [
+        0.10567567497491837,
+        -0.23202702403068542,
+        -0.5858108401298523
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-30T03:04:38+00:00Z",
+      "created_at": "2026-04-30T03:04:38+00:00Z"
+    },
+    {
+      "id": "synth-b8a9539ae7db",
+      "text": "HTML structure for the new landing page \u2014 semantic, not div soup.",
+      "tags": [
+        "html",
+        "synthetic",
+        "visual",
+        "web"
+      ],
+      "region": "visual_cortex",
+      "pos": [
+        -0.22972972691059113,
+        0.2641891837120056,
+        0.3606756627559662
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-14T11:04:38+00:00Z",
+      "created_at": "2026-04-14T11:04:38+00:00Z"
+    },
+    {
+      "id": "synth-7a420cbe0f36",
+      "text": "Chrome-MCP screenshot: comparing before/after of the new color theme.",
+      "tags": [
+        "chrome-mcp",
+        "screenshot",
+        "synthetic",
+        "visual"
+      ],
+      "region": "visual_cortex",
+      "pos": [
+        0.23891891539096832,
+        -0.03445946052670479,
+        -0.7879729866981506
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-15T00:04:38+00:00Z",
+      "created_at": "2026-04-15T00:04:38+00:00Z"
+    },
+    {
+      "id": "synth-2b74328a0a15",
+      "text": "3D viewport: orbit controls feel sluggish under load \u2014 debounce camera updates.",
+      "tags": [
+        "3d",
+        "synthetic",
+        "visual"
+      ],
+      "region": "visual_cortex",
+      "pos": [
+        0.05054054036736488,
+        0.09418918937444687,
+        -0.6363513469696045
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-22T04:04:38+00:00Z",
+      "created_at": "2026-04-22T04:04:38+00:00Z"
+    },
+    {
+      "id": "synth-5f143d29ea1c",
+      "text": "CSS: replaced flex layout with grid for the pricing table.",
+      "tags": [
+        "css",
+        "synthetic",
+        "ui",
+        "visual"
+      ],
+      "region": "visual_cortex",
+      "pos": [
+        0.22513513267040253,
+        -0.17689189314842224,
+        -0.6133784055709839
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-05-03T13:04:38+00:00Z",
+      "created_at": "2026-05-03T13:04:38+00:00Z"
+    },
+    {
+      "id": "synth-210fdfcca44c",
+      "text": "Visual regression test caught a missing icon in the header.",
+      "tags": [
+        "synthetic",
+        "ui",
+        "visual"
+      ],
+      "region": "visual_cortex",
+      "pos": [
+        -0.44108107686042786,
+        -0.19986486434936523,
+        0.5582432150840759
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-05-04T10:04:38+00:00Z",
+      "created_at": "2026-05-04T10:04:38+00:00Z"
+    },
+    {
+      "id": "synth-c87c41225d01",
+      "text": "Image optimization saved 60% on the homepage payload.",
+      "tags": [
+        "image",
+        "synthetic",
+        "visual",
+        "web"
+      ],
+      "region": "visual_cortex",
+      "pos": [
+        -0.3078378438949585,
+        -0.3193243145942688,
+        0.12175675481557846
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-18T03:04:38+00:00Z",
+      "created_at": "2026-04-18T03:04:38+00:00Z"
+    },
+    {
+      "id": "synth-4c55b6f416ed",
+      "text": "CAD viewer: click-to-explode showed unexpected hidden geometry.",
+      "tags": [
+        "3d",
+        "cad",
+        "synthetic",
+        "visual"
+      ],
+      "region": "visual_cortex",
+      "pos": [
+        -0.40432432293891907,
+        0.24121621251106262,
+        0.2871621549129486
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-18T13:04:38+00:00Z",
+      "created_at": "2026-04-18T13:04:38+00:00Z"
+    },
+    {
+      "id": "synth-7eed0d0dca54",
+      "text": "Screenshot from staging: header alignment is off by 2px on Safari.",
+      "tags": [
+        "screenshot",
+        "synthetic",
+        "ui",
+        "visual"
+      ],
+      "region": "visual_cortex",
+      "pos": [
+        -0.14243243634700775,
+        -0.2779729664325714,
+        0.11716216057538986
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-05-03T22:04:38+00:00Z",
+      "created_at": "2026-05-03T22:04:38+00:00Z"
+    },
+    {
+      "id": "synth-a665eb3e5692",
+      "text": "UX review: empty states need helpful CTAs, not just blank panels.",
+      "tags": [
+        "synthetic",
+        "ux",
+        "visual"
+      ],
+      "region": "visual_cortex",
+      "pos": [
+        0.13783784210681915,
+        -0.2504054009914398,
+        0.06662162393331528
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-29T18:04:38+00:00Z",
+      "created_at": "2026-04-29T18:04:38+00:00Z"
+    },
+    {
+      "id": "synth-8f7bf43e1283",
+      "text": "Music: classical piano works well for deep coding sessions.",
+      "tags": [
+        "audio",
+        "music",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_left",
+      "pos": [
+        -0.12405405193567276,
+        -0.19067567586898804,
+        -0.7282432317733765
+      ],
+      "degree": 14,
+      "mentioned_at": "2026-04-18T05:04:38+00:00Z",
+      "created_at": "2026-04-18T05:04:38+00:00Z"
+    },
+    {
+      "id": "synth-c6683c710139",
+      "text": "Music recommendation: ambient generative loops for focus.",
+      "tags": [
+        "music",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_left",
+      "pos": [
+        0.46864864230155945,
+        0.12635135650634766,
+        0.20905405282974243
+      ],
+      "degree": 12,
+      "mentioned_at": "2026-04-11T05:04:38+00:00Z",
+      "created_at": "2026-04-11T05:04:38+00:00Z"
+    },
+    {
+      "id": "synth-5ec87bc20825",
+      "text": "Reference: HTTP/3 uses QUIC, not TCP underneath.",
+      "tags": [
+        "reference",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_left",
+      "pos": [
+        -0.022972973063588142,
+        -0.05743243172764778,
+        -0.40662163496017456
+      ],
+      "degree": 13,
+      "mentioned_at": "2026-04-30T17:04:38+00:00Z",
+      "created_at": "2026-04-30T17:04:38+00:00Z"
+    },
+    {
+      "id": "synth-b977954a5b7e",
+      "text": "Knowledge: vector DBs trade storage for query latency.",
+      "tags": [
+        "knowledge",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_left",
+      "pos": [
+        0.5329729914665222,
+        0.20445945858955383,
+        -0.41121622920036316
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-15T07:04:38+00:00Z",
+      "created_at": "2026-04-15T07:04:38+00:00Z"
+    },
+    {
+      "id": "synth-182d183b2818",
+      "text": "Fact: Linux's epoll outperforms select for high-concurrency servers.",
+      "tags": [
+        "memory_type:fact",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_left",
+      "pos": [
+        0.15621621906757355,
+        -0.22283783555030823,
+        -0.3101351261138916
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-23T07:04:38+00:00Z",
+      "created_at": "2026-04-23T07:04:38+00:00Z"
+    },
+    {
+      "id": "synth-9517599b4200",
+      "text": "Rule: don't cache without an invalidation strategy.",
+      "tags": [
+        "memory_type:rule",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_left",
+      "pos": [
+        0.14702703058719635,
+        -0.20905405282974243,
+        -0.5031080842018127
+      ],
+      "degree": 13,
+      "mentioned_at": "2026-04-08T21:04:38+00:00Z",
+      "created_at": "2026-04-08T21:04:38+00:00Z"
+    },
+    {
+      "id": "synth-912d29e53c54",
+      "text": "Procedure: rotate API keys monthly, document old/new in changelog.",
+      "tags": [
+        "memory_type:procedure",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_left",
+      "pos": [
+        0.20216216146945953,
+        -0.3422972857952118,
+        0.15391892194747925
+      ],
+      "degree": 15,
+      "mentioned_at": "2026-04-15T00:04:38+00:00Z",
+      "created_at": "2026-04-15T00:04:38+00:00Z"
+    },
+    {
+      "id": "synth-2beee19c694d",
+      "text": "Rule: never parse JSON with regex.",
+      "tags": [
+        "memory_type:rule",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_left",
+      "pos": [
+        0.5283783674240112,
+        0.21364864706993103,
+        -0.3652702569961548
+      ],
+      "degree": 12,
+      "mentioned_at": "2026-05-05T08:04:38+00:00Z",
+      "created_at": "2026-05-05T08:04:38+00:00Z"
+    },
+    {
+      "id": "synth-a3aa4083c14d",
+      "text": "Procedure for postmortems: timeline first, root cause second, actions third.",
+      "tags": [
+        "memory_type:procedure",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_left",
+      "pos": [
+        -0.14702703058719635,
+        0.259594589471817,
+        -0.6501351594924927
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-11T17:04:38+00:00Z",
+      "created_at": "2026-04-11T17:04:38+00:00Z"
+    },
+    {
+      "id": "synth-87d4474a2253",
+      "text": "Fact: Postgres uses MVCC for transaction isolation by default.",
+      "tags": [
+        "knowledge",
+        "memory_type:fact",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_left",
+      "pos": [
+        -0.01378378365188837,
+        0.2733783721923828,
+        0.49391892552375793
+      ],
+      "degree": 12,
+      "mentioned_at": "2026-04-30T14:04:38+00:00Z",
+      "created_at": "2026-04-30T14:04:38+00:00Z"
+    },
+    {
+      "id": "synth-a57f3047db8e",
+      "text": "Audio: noise-cancelling helps but pink noise helps more.",
+      "tags": [
+        "audio",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_left",
+      "pos": [
+        -0.44567567110061646,
+        -0.07121621817350388,
+        -0.5950000286102295
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-22T16:04:38+00:00Z",
+      "created_at": "2026-04-22T16:04:38+00:00Z"
+    },
+    {
+      "id": "synth-967461b1e943",
+      "text": "Reference: TLS handshake takes ~1 RTT on modern stacks.",
+      "tags": [
+        "knowledge",
+        "reference",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_left",
+      "pos": [
+        0.2848648726940155,
+        -0.08500000089406967,
+        -0.7466216087341309
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-05-01T12:04:38+00:00Z",
+      "created_at": "2026-05-01T12:04:38+00:00Z"
+    },
+    {
+      "id": "synth-8ce51707b78c",
+      "text": "Rule: don't ship features behind feature flags older than 90 days.",
+      "tags": [
+        "memory_type:rule",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_right",
+      "pos": [
+        -0.3354054093360901,
+        0.5260810852050781,
+        0.011486486531794071
+      ],
+      "degree": 13,
+      "mentioned_at": "2026-04-23T05:04:38+00:00Z",
+      "created_at": "2026-04-23T05:04:38+00:00Z"
+    },
+    {
+      "id": "synth-2750350d0921",
+      "text": "Rule: production database changes go through a migration tool, never psql.",
+      "tags": [
+        "memory_type:rule",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_right",
+      "pos": [
+        0.14243243634700775,
+        -0.19067567586898804,
+        -0.49391892552375793
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-30T08:04:38+00:00Z",
+      "created_at": "2026-04-30T08:04:38+00:00Z"
+    },
+    {
+      "id": "synth-95fc736a944e",
+      "text": "Reference: HTTP status codes the web actually uses (vs the spec).",
+      "tags": [
+        "reference",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_right",
+      "pos": [
+        -0.17000000178813934,
+        -0.2733783721923828,
+        0.08040540665388107
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-05-01T08:04:38+00:00Z",
+      "created_at": "2026-05-01T08:04:38+00:00Z"
+    },
+    {
+      "id": "synth-c30055ecc96b",
+      "text": "Music: lo-fi works for me; jazz fusion does NOT, oddly.",
+      "tags": [
+        "music",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_right",
+      "pos": [
+        0.20216216146945953,
+        -0.23202702403068542,
+        0.07121621817350388
+      ],
+      "degree": 15,
+      "mentioned_at": "2026-04-24T12:04:38+00:00Z",
+      "created_at": "2026-04-24T12:04:38+00:00Z"
+    },
+    {
+      "id": "synth-9055c36ce608",
+      "text": "Reference doc: AWS region/AZ topology and latency matrix.",
+      "tags": [
+        "reference",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_right",
+      "pos": [
+        0.09648648649454117,
+        -0.14472973346710205,
+        -0.47094595432281494
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-27T07:04:38+00:00Z",
+      "created_at": "2026-04-27T07:04:38+00:00Z"
+    },
+    {
+      "id": "synth-4ad9152bfe29",
+      "text": "Audio cue: success chime on deploy, sad trombone on rollback.",
+      "tags": [
+        "audio",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_right",
+      "pos": [
+        -0.08270270377397537,
+        -0.14013513922691345,
+        -0.7879729866981506
+      ],
+      "degree": 12,
+      "mentioned_at": "2026-04-14T22:04:38+00:00Z",
+      "created_at": "2026-04-14T22:04:38+00:00Z"
+    },
+    {
+      "id": "synth-d673b15e0686",
+      "text": "Knowledge base: PostgreSQL row-level security policies.",
+      "tags": [
+        "knowledge",
+        "reference",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_right",
+      "pos": [
+        -0.041351351886987686,
+        -0.19986486434936523,
+        -0.7052702903747559
+      ],
+      "degree": 12,
+      "mentioned_at": "2026-05-02T14:04:38+00:00Z",
+      "created_at": "2026-05-02T14:04:38+00:00Z"
+    },
+    {
+      "id": "synth-21f956d20e5f",
+      "text": "Procedure: incident comms template \u2014 what / impact / status / next update.",
+      "tags": [
+        "memory_type:procedure",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_right",
+      "pos": [
+        0.045945946127176285,
+        0.3790540397167206,
+        0.40662163496017456
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-30T19:04:38+00:00Z",
+      "created_at": "2026-04-30T19:04:38+00:00Z"
+    },
+    {
+      "id": "synth-8b9c73b9d07f",
+      "text": "Fact: the human eye can distinguish about 10 million colors.",
+      "tags": [
+        "memory_type:fact",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_right",
+      "pos": [
+        0.3032432496547699,
+        0.17689189314842224,
+        -0.5490540266036987
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-13T03:04:38+00:00Z",
+      "created_at": "2026-04-13T03:04:38+00:00Z"
+    },
+    {
+      "id": "synth-ea14d40ebd4d",
+      "text": "Procedure: backup encryption keys to two separate offline locations.",
+      "tags": [
+        "memory_type:procedure",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_right",
+      "pos": [
+        0.20216216146945953,
+        -0.23662161827087402,
+        0.10797297209501266
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-13T10:04:38+00:00Z",
+      "created_at": "2026-04-13T10:04:38+00:00Z"
+    },
+    {
+      "id": "synth-d5813e925c90",
+      "text": "Fact: rust's borrow checker prevents double-free at compile time.",
+      "tags": [
+        "memory_type:fact",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_right",
+      "pos": [
+        -0.2986486554145813,
+        -0.2917567491531372,
+        0.09418918937444687
+      ],
+      "degree": 12,
+      "mentioned_at": "2026-05-05T02:04:38+00:00Z",
+      "created_at": "2026-05-05T02:04:38+00:00Z"
+    },
+    {
+      "id": "synth-4c9c169dbd4c",
+      "text": "Knowledge: BGP convergence times in real-world networks.",
+      "tags": [
+        "knowledge",
+        "synthetic",
+        "temporal"
+      ],
+      "region": "temporal_lobe_right",
+      "pos": [
+        -0.2756756842136383,
+        -0.006891891825944185,
+        -0.7236486673355103
+      ],
+      "degree": 12,
+      "mentioned_at": "2026-04-20T04:04:38+00:00Z",
+      "created_at": "2026-04-20T04:04:38+00:00Z"
+    },
+    {
+      "id": "synth-be5c3f4b0e83",
+      "text": "Memory cleanup: collapsed 30 single-fact docs into 4 multi-fact ones.",
+      "tags": [
+        "cleanup",
+        "hippocampus",
+        "memory",
+        "synthetic"
+      ],
+      "region": "hippocampus",
+      "pos": [
+        0.09648648649454117,
+        -0.21824324131011963,
+        -0.5306756496429443
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-29T02:04:38+00:00Z",
+      "created_at": "2026-04-29T02:04:38+00:00Z"
+    },
+    {
+      "id": "synth-0edcfa71eed5",
+      "text": "Consolidated: 'simple' is a feature, not a missing feature.",
+      "tags": [
+        "consolidated",
+        "hippocampus",
+        "synthetic"
+      ],
+      "region": "hippocampus",
+      "pos": [
+        -0.10108108073472977,
+        -0.43878379464149475,
+        -0.06202702596783638
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-05-05T01:04:38+00:00Z",
+      "created_at": "2026-05-05T01:04:38+00:00Z"
+    },
+    {
+      "id": "synth-7a22f22ec21b",
+      "text": "Memory store: stable document IDs reduce orphan facts in long-running banks.",
+      "tags": [
+        "hippocampus",
+        "memory",
+        "store",
+        "synthetic"
+      ],
+      "region": "hippocampus",
+      "pos": [
+        -0.46405404806137085,
+        -0.3606756627559662,
+        -0.09418918937444687
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-22T23:04:38+00:00Z",
+      "created_at": "2026-04-22T23:04:38+00:00Z"
+    },
+    {
+      "id": "synth-fbeca2e89d86",
+      "text": "Consolidated rule: every save should set a timestamp + a stable id.",
+      "tags": [
+        "consolidated",
+        "hippocampus",
+        "synthetic"
+      ],
+      "region": "hippocampus",
+      "pos": [
+        -0.15621621906757355,
+        0.06202702596783638,
+        -0.40202704071998596
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-18T04:04:38+00:00Z",
+      "created_at": "2026-04-18T04:04:38+00:00Z"
+    },
+    {
+      "id": "synth-b917cff17ba7",
+      "text": "Memory bank tagged 'feedback' is the highest-signal source for retrospectives.",
+      "tags": [
+        "bank",
+        "feedback",
+        "hippocampus",
+        "synthetic"
+      ],
+      "region": "hippocampus",
+      "pos": [
+        0.39972972869873047,
+        -0.5306756496429443,
+        -0.24581080675125122
+      ],
+      "degree": 12,
+      "mentioned_at": "2026-04-28T14:04:38+00:00Z",
+      "created_at": "2026-04-28T14:04:38+00:00Z"
+    },
+    {
+      "id": "synth-698d2fafd827",
+      "text": "Mental model: code review is teaching, not gatekeeping.",
+      "tags": [
+        "hippocampus",
+        "mental-model",
+        "synthetic"
+      ],
+      "region": "hippocampus",
+      "pos": [
+        0.05972972884774208,
+        -0.6593243479728699,
+        -0.43878379464149475
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-29T12:04:38+00:00Z",
+      "created_at": "2026-04-29T12:04:38+00:00Z"
+    },
+    {
+      "id": "synth-100590cfc32e",
+      "text": "Memory: a project's complexity is bounded by what one person can hold in head.",
+      "tags": [
+        "hippocampus",
+        "memory",
+        "synthetic"
+      ],
+      "region": "hippocampus",
+      "pos": [
+        0.03216216340661049,
+        -0.10797297209501266,
+        -0.7144594788551331
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-05-01T23:04:38+00:00Z",
+      "created_at": "2026-05-01T23:04:38+00:00Z"
+    },
+    {
+      "id": "synth-06b5b407c93b",
+      "text": "Memory store: tag layout works best with 3\u20135 tags per memory.",
+      "tags": [
+        "hippocampus",
+        "memory",
+        "store",
+        "synthetic"
+      ],
+      "region": "hippocampus",
+      "pos": [
+        -0.19297297298908234,
+        -0.24581080675125122,
+        0.6179729700088501
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-22T10:04:38+00:00Z",
+      "created_at": "2026-04-22T10:04:38+00:00Z"
+    },
+    {
+      "id": "synth-1be826b7cc95",
+      "text": "Mental model: incident severity is impact \u00d7 duration, not impact alone.",
+      "tags": [
+        "hippocampus",
+        "mental-model",
+        "synthetic"
+      ],
+      "region": "hippocampus",
+      "pos": [
+        -0.15621621906757355,
+        -0.305540531873703,
+        0.11256756633520126
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-05-06T06:04:38+00:00Z",
+      "created_at": "2026-05-06T06:04:38+00:00Z"
+    },
+    {
+      "id": "synth-fa5d2a3e9580",
+      "text": "Mental model: latency budgets > raw perf numbers for UX decisions.",
+      "tags": [
+        "hippocampus",
+        "mental-model",
+        "synthetic"
+      ],
+      "region": "hippocampus",
+      "pos": [
+        -0.07351351529359818,
+        0.14013513922691345,
+        0.19527027010917664
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-18T17:04:38+00:00Z",
+      "created_at": "2026-04-18T17:04:38+00:00Z"
+    },
+    {
+      "id": "synth-6804ce8d766c",
+      "text": "Consolidated memory: prefer Postgres for OLTP, ClickHouse for analytics.",
+      "tags": [
+        "consolidated",
+        "hippocampus",
+        "synthetic"
+      ],
+      "region": "hippocampus",
+      "pos": [
+        -0.2664864957332611,
+        -0.2504054009914398,
+        0.10337837785482407
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-19T14:04:38+00:00Z",
+      "created_at": "2026-04-19T14:04:38+00:00Z"
+    },
+    {
+      "id": "synth-8c1f555d8de7",
+      "text": "Bank refresh: rotated old session memories into the cold-storage tier.",
+      "tags": [
+        "bank",
+        "hippocampus",
+        "memory",
+        "synthetic"
+      ],
+      "region": "hippocampus",
+      "pos": [
+        0.44108107686042786,
+        -0.14932432770729065,
+        -0.6363513469696045
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-28T16:04:38+00:00Z",
+      "created_at": "2026-04-28T16:04:38+00:00Z"
+    },
+    {
+      "id": "synth-0bf4ed5115c8",
+      "text": "Logic: the auth check belongs at the edge, not deep in handlers.",
+      "tags": [
+        "logic",
+        "parietal",
+        "synthetic"
+      ],
+      "region": "parietal_lobe",
+      "pos": [
+        -0.12405405193567276,
+        -0.09418918937444687,
+        -0.43418920040130615
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-26T23:04:38+00:00Z",
+      "created_at": "2026-04-26T23:04:38+00:00Z"
+    },
+    {
+      "id": "synth-6ba69a2d332a",
+      "text": "Architecture: split read/write paths so each scales independently.",
+      "tags": [
+        "architecture",
+        "parietal",
+        "synthetic"
+      ],
+      "region": "parietal_lobe",
+      "pos": [
+        0.5605405569076538,
+        0.24581080675125122,
+        -0.12635135650634766
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-08T16:04:38+00:00Z",
+      "created_at": "2026-04-08T16:04:38+00:00Z"
+    },
+    {
+      "id": "synth-012271af703c",
+      "text": "Config schema: validate on boot; fail loud, fail fast.",
+      "tags": [
+        "config-schema",
+        "parietal",
+        "schema",
+        "synthetic"
+      ],
+      "region": "parietal_lobe",
+      "pos": [
+        0.5329729914665222,
+        -0.06202702596783638,
+        0.20445945858955383
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-05-03T17:04:38+00:00Z",
+      "created_at": "2026-05-03T17:04:38+00:00Z"
+    },
+    {
+      "id": "synth-1dd916d51052",
+      "text": "Tech stack pick: TypeScript on the backend was the right call.",
+      "tags": [
+        "parietal",
+        "synthetic",
+        "tech",
+        "tech-stack"
+      ],
+      "region": "parietal_lobe",
+      "pos": [
+        -0.3813513517379761,
+        -0.259594589471817,
+        -0.5306756496429443
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-05-02T12:04:38+00:00Z",
+      "created_at": "2026-05-02T12:04:38+00:00Z"
+    },
+    {
+      "id": "synth-a233d7fc41f2",
+      "text": "Data model: one source of truth for user state, derived views downstream.",
+      "tags": [
+        "data",
+        "parietal",
+        "synthetic"
+      ],
+      "region": "parietal_lobe",
+      "pos": [
+        0.3308108150959015,
+        0.3606756627559662,
+        0.3790540397167206
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-17T14:04:38+00:00Z",
+      "created_at": "2026-04-17T14:04:38+00:00Z"
+    },
+    {
+      "id": "synth-77cadb0ae4aa",
+      "text": "Tech stack note: prefer boring tech for the critical path.",
+      "tags": [
+        "parietal",
+        "stack",
+        "synthetic"
+      ],
+      "region": "parietal_lobe",
+      "pos": [
+        -0.2756756842136383,
+        -0.08959459513425827,
+        -0.6363513469696045
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-29T23:04:38+00:00Z",
+      "created_at": "2026-04-29T23:04:38+00:00Z"
+    },
+    {
+      "id": "synth-976a020d3c81",
+      "text": "Architecture: pull-based queues scale operations better than push.",
+      "tags": [
+        "architecture",
+        "parietal",
+        "synthetic"
+      ],
+      "region": "parietal_lobe",
+      "pos": [
+        0.14702703058719635,
+        0.2917567491531372,
+        -0.12635135650634766
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-20T05:04:38+00:00Z",
+      "created_at": "2026-04-20T05:04:38+00:00Z"
+    },
+    {
+      "id": "synth-1b37cd50e7c8",
+      "text": "Code review: extract the magic constant into a named export.",
+      "tags": [
+        "code",
+        "parietal",
+        "synthetic"
+      ],
+      "region": "parietal_lobe",
+      "pos": [
+        0.10567567497491837,
+        0.45716217160224915,
+        0.3836486339569092
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-08T19:04:38+00:00Z",
+      "created_at": "2026-04-08T19:04:38+00:00Z"
+    },
+    {
+      "id": "synth-91db646bae2e",
+      "text": "System design: rate limit by API key, not just by IP.",
+      "tags": [
+        "parietal",
+        "synthetic",
+        "system-design"
+      ],
+      "region": "parietal_lobe",
+      "pos": [
+        -0.6294594407081604,
+        -0.2549999952316284,
+        0.05743243172764778
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-16T07:04:38+00:00Z",
+      "created_at": "2026-04-16T07:04:38+00:00Z"
+    },
+    {
+      "id": "synth-93ff67647dd4",
+      "text": "Repo layout: monorepo with workspaces beats polyrepo for shared types.",
+      "tags": [
+        "parietal",
+        "repo-layout",
+        "synthetic"
+      ],
+      "region": "parietal_lobe",
+      "pos": [
+        -0.14243243634700775,
+        0.3560810685157776,
+        0.39743244647979736
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-05-05T20:04:38+00:00Z",
+      "created_at": "2026-05-05T20:04:38+00:00Z"
+    },
+    {
+      "id": "synth-652efaf825f2",
+      "text": "System design: circuit breakers between services, not just timeouts.",
+      "tags": [
+        "parietal",
+        "synthetic",
+        "system-design"
+      ],
+      "region": "parietal_lobe",
+      "pos": [
+        0.19756756722927094,
+        -0.49851351976394653,
+        -0.6041892170906067
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-12T16:04:38+00:00Z",
+      "created_at": "2026-04-12T16:04:38+00:00Z"
+    },
+    {
+      "id": "synth-c6dda4bcba7e",
+      "text": "Math: fenwick trees are the right shape for rolling-window stats.",
+      "tags": [
+        "math",
+        "parietal",
+        "synthetic"
+      ],
+      "region": "parietal_lobe",
+      "pos": [
+        -0.2894594669342041,
+        -0.28256756067276,
+        0.44797298312187195
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-30T21:04:38+00:00Z",
+      "created_at": "2026-04-30T21:04:38+00:00Z"
+    },
+    {
+      "id": "synth-79678cff1bba",
+      "text": "MCP server adapter accepts both inbound report_event and report_memory.",
+      "tags": [
+        "mcp",
+        "motor",
+        "synthetic",
+        "tool"
+      ],
+      "region": "motor_cortex",
+      "pos": [
+        0.3032432496547699,
+        -0.20905405282974243,
+        -0.48932433128356934
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-05-02T19:04:38+00:00Z",
+      "created_at": "2026-05-02T19:04:38+00:00Z"
+    },
+    {
+      "id": "synth-440b4f6e3637",
+      "text": "Action: tagged release v3.2 and pushed to GitHub.",
+      "tags": [
+        "action",
+        "github",
+        "motor",
+        "synthetic"
+      ],
+      "region": "motor_cortex",
+      "pos": [
+        0.3675675690174103,
+        -0.3239189088344574,
+        -0.5628378391265869
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-25T19:04:38+00:00Z",
+      "created_at": "2026-04-25T19:04:38+00:00Z"
+    },
+    {
+      "id": "synth-a2f692f1dd9d",
+      "text": "Deployment: rolled out to canary first, watched metrics 10 minutes.",
+      "tags": [
+        "deployment",
+        "motor",
+        "operations",
+        "synthetic"
+      ],
+      "region": "motor_cortex",
+      "pos": [
+        0.19756756722927094,
+        0.03445946052670479,
+        -0.760405421257019
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-29T23:04:38+00:00Z",
+      "created_at": "2026-04-29T23:04:38+00:00Z"
+    },
+    {
+      "id": "synth-a096c26bd9b6",
+      "text": "Setup: provisioned the new dev VM with one Ansible playbook.",
+      "tags": [
+        "motor",
+        "setup",
+        "synthetic"
+      ],
+      "region": "motor_cortex",
+      "pos": [
+        0.39972972869873047,
+        0.08500000089406967,
+        0.5628378391265869
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-15T17:04:38+00:00Z",
+      "created_at": "2026-04-15T17:04:38+00:00Z"
+    },
+    {
+      "id": "synth-97307ecd22cd",
+      "text": "Bash: created the new deploy script \u2014 wraps docker compose + healthcheck.",
+      "tags": [
+        "bash",
+        "exec",
+        "motor",
+        "synthetic"
+      ],
+      "region": "motor_cortex",
+      "pos": [
+        0.3078378438949585,
+        -0.12175675481557846,
+        -0.7649999856948853
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-12T03:04:38+00:00Z",
+      "created_at": "2026-04-12T03:04:38+00:00Z"
+    },
+    {
+      "id": "synth-fdabfb8f926a",
+      "text": "Cloudflare config: added a worker for cache-key normalization.",
+      "tags": [
+        "cloudflare",
+        "motor",
+        "synthetic"
+      ],
+      "region": "motor_cortex",
+      "pos": [
+        -0.11486486345529556,
+        -0.15851351618766785,
+        -0.3790540397167206
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-16T21:04:38+00:00Z",
+      "created_at": "2026-04-16T21:04:38+00:00Z"
+    },
+    {
+      "id": "synth-3a9da14bc086",
+      "text": "Operations: scheduled the cron job for nightly DB compaction.",
+      "tags": [
+        "motor",
+        "operations",
+        "synthetic"
+      ],
+      "region": "motor_cortex",
+      "pos": [
+        -0.08729729801416397,
+        -0.2733783721923828,
+        0.20905405282974243
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-29T15:04:38+00:00Z",
+      "created_at": "2026-04-29T15:04:38+00:00Z"
+    },
+    {
+      "id": "synth-11ee48c24fa7",
+      "text": "Tool call: ran migration in staging; took 4 minutes, no errors.",
+      "tags": [
+        "exec",
+        "motor",
+        "synthetic",
+        "tool"
+      ],
+      "region": "motor_cortex",
+      "pos": [
+        0.45027026534080505,
+        0.07121621817350388,
+        0.17689189314842224
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-08T07:04:38+00:00Z",
+      "created_at": "2026-04-08T07:04:38+00:00Z"
+    },
+    {
+      "id": "synth-b61191e99450",
+      "text": "Docker: rebuilt the base image to pull in the latest CVE patches.",
+      "tags": [
+        "docker",
+        "motor",
+        "synthetic"
+      ],
+      "region": "motor_cortex",
+      "pos": [
+        0.2527027130126953,
+        -0.3560810685157776,
+        0.13094595074653625
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-30T21:04:38+00:00Z",
+      "created_at": "2026-04-30T21:04:38+00:00Z"
+    },
+    {
+      "id": "synth-c7e229f1ec49",
+      "text": "GitHub: cleaned up stale branches; 23 merged feature branches purged.",
+      "tags": [
+        "github",
+        "motor",
+        "synthetic"
+      ],
+      "region": "motor_cortex",
+      "pos": [
+        0.2802702784538269,
+        -0.39743244647979736,
+        -0.18608108162879944
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-11T07:04:38+00:00Z",
+      "created_at": "2026-04-11T07:04:38+00:00Z"
+    },
+    {
+      "id": "synth-7b8723e8f3d5",
+      "text": "CLI: wrote a small wrapper around the deploy command for convenience.",
+      "tags": [
+        "cli",
+        "motor",
+        "synthetic",
+        "tool"
+      ],
+      "region": "motor_cortex",
+      "pos": [
+        -0.47324323654174805,
+        -0.12635135650634766,
+        0.40662163496017456
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-28T15:04:38+00:00Z",
+      "created_at": "2026-04-28T15:04:38+00:00Z"
+    },
+    {
+      "id": "synth-a27c815bc3e3",
+      "text": "Rate limiting: bumped the API budget after measuring real usage.",
+      "tags": [
+        "motor",
+        "rate-limiting",
+        "synthetic"
+      ],
+      "region": "motor_cortex",
+      "pos": [
+        -0.5008108019828796,
+        0.3652702569961548,
+        -0.23662161827087402
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-24T19:04:38+00:00Z",
+      "created_at": "2026-04-24T19:04:38+00:00Z"
+    },
+    {
+      "id": "synth-884028ea94e3",
+      "text": "Test plan: covered the three new edge cases identified in code review.",
+      "tags": [
+        "cerebellum",
+        "synthetic",
+        "test",
+        "testing"
+      ],
+      "region": "cerebellum",
+      "pos": [
+        0.05972972884774208,
+        0.07581081241369247,
+        -0.7098648548126221
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-26T12:04:38+00:00Z",
+      "created_at": "2026-04-26T12:04:38+00:00Z"
+    },
+    {
+      "id": "synth-79878ae42b94",
+      "text": "CI/CD: pipeline now caches deps; saved 3 minutes per run.",
+      "tags": [
+        "cerebellum",
+        "ci",
+        "synthetic"
+      ],
+      "region": "cerebellum",
+      "pos": [
+        -0.2710810899734497,
+        -0.3468918800354004,
+        0.11716216057538986
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-12T12:04:38+00:00Z",
+      "created_at": "2026-04-12T12:04:38+00:00Z"
+    },
+    {
+      "id": "synth-4b27cc321593",
+      "text": "Auth flow: simplified the OAuth callback to a single redirect.",
+      "tags": [
+        "auth",
+        "cerebellum",
+        "synthetic"
+      ],
+      "region": "cerebellum",
+      "pos": [
+        0.01378378365188837,
+        -0.03905405476689339,
+        -0.6547297239303589
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-16T04:04:38+00:00Z",
+      "created_at": "2026-04-16T04:04:38+00:00Z"
+    },
+    {
+      "id": "synth-2c8a9bd8f76a",
+      "text": "Testing: added a property-based test for the date parser.",
+      "tags": [
+        "cerebellum",
+        "synthetic",
+        "test",
+        "testing"
+      ],
+      "region": "cerebellum",
+      "pos": [
+        0.06891892105340958,
+        -0.08959459513425827,
+        -0.374459445476532
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-15T03:04:38+00:00Z",
+      "created_at": "2026-04-15T03:04:38+00:00Z"
+    },
+    {
+      "id": "synth-c17dd46836e5",
+      "text": "Testing strategy: integration tests over mocks for the payment path.",
+      "tags": [
+        "cerebellum",
+        "synthetic",
+        "testing"
+      ],
+      "region": "cerebellum",
+      "pos": [
+        0.24810810387134552,
+        -0.374459445476532,
+        -0.6501351594924927
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-05-06T17:04:38+00:00Z",
+      "created_at": "2026-05-06T17:04:38+00:00Z"
+    },
+    {
+      "id": "synth-c495b4782b33",
+      "text": "CI: split the test job into 4 shards, cut runtime from 18 to 6 minutes.",
+      "tags": [
+        "cerebellum",
+        "ci",
+        "synthetic",
+        "testing"
+      ],
+      "region": "cerebellum",
+      "pos": [
+        -0.43648648262023926,
+        0.09418918937444687,
+        0.42040541768074036
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-05-01T02:04:38+00:00Z",
+      "created_at": "2026-05-01T02:04:38+00:00Z"
+    },
+    {
+      "id": "synth-5807c144cec5",
+      "text": "Auth: rotated the JWT signing key and verified zero downtime.",
+      "tags": [
+        "auth",
+        "cerebellum",
+        "synthetic"
+      ],
+      "region": "cerebellum",
+      "pos": [
+        -0.2710810899734497,
+        0.12635135650634766,
+        0.5214864611625671
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-05-05T17:04:38+00:00Z",
+      "created_at": "2026-05-05T17:04:38+00:00Z"
+    },
+    {
+      "id": "synth-3332338d06c9",
+      "text": "CI failure: flaky test; pinned to a fixed timestamp to stabilize.",
+      "tags": [
+        "cerebellum",
+        "ci",
+        "synthetic"
+      ],
+      "region": "cerebellum",
+      "pos": [
+        0.10108108073472977,
+        -0.46175676584243774,
+        -0.07121621817350388
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-23T09:04:38+00:00Z",
+      "created_at": "2026-04-23T09:04:38+00:00Z"
+    },
+    {
+      "id": "synth-dac57f83353a",
+      "text": "Coordination: kicked off the cross-team weekly working group.",
+      "tags": [
+        "cerebellum",
+        "coordination",
+        "synthetic"
+      ],
+      "region": "cerebellum",
+      "pos": [
+        -0.041351351886987686,
+        -0.6225675940513611,
+        -0.3836486339569092
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-23T01:04:38+00:00Z",
+      "created_at": "2026-04-23T01:04:38+00:00Z"
+    },
+    {
+      "id": "synth-583270e36755",
+      "text": "Auth: enforced 2FA on all admin accounts.",
+      "tags": [
+        "auth",
+        "cerebellum",
+        "synthetic"
+      ],
+      "region": "cerebellum",
+      "pos": [
+        0.2572973072528839,
+        0.305540531873703,
+        -0.6087837815284729
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-05-03T08:04:38+00:00Z",
+      "created_at": "2026-05-03T08:04:38+00:00Z"
+    },
+    {
+      "id": "synth-babe4b7cf6ec",
+      "text": "Coordination: aligned with platform team on the migration window.",
+      "tags": [
+        "cerebellum",
+        "coordination",
+        "synthetic"
+      ],
+      "region": "cerebellum",
+      "pos": [
+        0.11027026921510696,
+        -0.09418918937444687,
+        -0.6225675940513611
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-30T12:04:38+00:00Z",
+      "created_at": "2026-04-30T12:04:38+00:00Z"
+    },
+    {
+      "id": "synth-1aea29a0dce8",
+      "text": "Coordination meeting: settled the API contract for cross-team work.",
+      "tags": [
+        "cerebellum",
+        "coordination",
+        "synthetic"
+      ],
+      "region": "cerebellum",
+      "pos": [
+        -0.2527027130126953,
+        -0.3377026915550232,
+        0.13094595074653625
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-14T07:04:38+00:00Z",
+      "created_at": "2026-04-14T07:04:38+00:00Z"
+    },
+    {
+      "id": "synth-a1ff7b52bbba",
+      "text": "Error: HTTP 500 from the recommendation service, brief outage at 3pm.",
+      "tags": [
+        "amygdala",
+        "error",
+        "synthetic"
+      ],
+      "region": "amygdala",
+      "pos": [
+        0.22972972691059113,
+        -0.10337837785482407,
+        0.6777027249336243
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-20T11:04:38+00:00Z",
+      "created_at": "2026-04-20T11:04:38+00:00Z"
+    },
+    {
+      "id": "synth-014a9ee3b3a3",
+      "text": "Incident postmortem: missing alarms hid a slow rollout problem.",
+      "tags": [
+        "amygdala",
+        "incident",
+        "synthetic"
+      ],
+      "region": "amygdala",
+      "pos": [
+        0.18837837874889374,
+        0.11256756633520126,
+        -0.6685135364532471
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-26T08:04:38+00:00Z",
+      "created_at": "2026-04-26T08:04:38+00:00Z"
+    },
+    {
+      "id": "synth-ee4c63752901",
+      "text": "Gotcha: timezone naive datetimes silently shift on serialization.",
+      "tags": [
+        "amygdala",
+        "gotcha",
+        "synthetic"
+      ],
+      "region": "amygdala",
+      "pos": [
+        -0.05513513460755348,
+        -0.328513503074646,
+        0.6822972893714905
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-19T16:04:38+00:00Z",
+      "created_at": "2026-04-19T16:04:38+00:00Z"
+    },
+    {
+      "id": "synth-8c465896cac2",
+      "text": "Warning: don't run vacuum during peak hours; it locks tables.",
+      "tags": [
+        "amygdala",
+        "synthetic",
+        "warning"
+      ],
+      "region": "amygdala",
+      "pos": [
+        -0.11945945769548416,
+        0.44337838888168335,
+        0.09418918937444687
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-22T23:04:38+00:00Z",
+      "created_at": "2026-04-22T23:04:38+00:00Z"
+    },
+    {
+      "id": "synth-dadfa41fb28c",
+      "text": "Gotcha: Postgres' default lock timeout is 0 \u2014 set it explicitly.",
+      "tags": [
+        "amygdala",
+        "gotcha",
+        "synthetic"
+      ],
+      "region": "amygdala",
+      "pos": [
+        0.07810810953378677,
+        0.24581080675125122,
+        -0.6087837815284729
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-14T21:04:38+00:00Z",
+      "created_at": "2026-04-14T21:04:38+00:00Z"
+    },
+    {
+      "id": "synth-9d1089e2dd1b",
+      "text": "Gotcha: Docker's --restart unless-stopped doesn't survive `compose down`.",
+      "tags": [
+        "amygdala",
+        "gotcha",
+        "synthetic"
+      ],
+      "region": "amygdala",
+      "pos": [
+        0.08729729801416397,
+        -0.020675675943493843,
+        0.6777027249336243
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-17T02:04:38+00:00Z",
+      "created_at": "2026-04-17T02:04:38+00:00Z"
+    },
+    {
+      "id": "synth-d3d989499f45",
+      "text": "Error path: handle the network error before the 'happy path' assertion.",
+      "tags": [
+        "amygdala",
+        "error",
+        "synthetic"
+      ],
+      "region": "amygdala",
+      "pos": [
+        0.3767567574977875,
+        0.47094595432281494,
+        0.07121621817350388
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-24T03:04:38+00:00Z",
+      "created_at": "2026-04-24T03:04:38+00:00Z"
+    },
+    {
+      "id": "synth-7084a49d70cf",
+      "text": "Bugfix: off-by-one in the pagination cursor; added a regression test.",
+      "tags": [
+        "amygdala",
+        "bug",
+        "bugfix",
+        "synthetic"
+      ],
+      "region": "amygdala",
+      "pos": [
+        0.2848648726940155,
+        -0.3193243145942688,
+        0.10797297209501266
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-27T11:04:38+00:00Z",
+      "created_at": "2026-04-27T11:04:38+00:00Z"
+    },
+    {
+      "id": "synth-3f6e9ec2a7d0",
+      "text": "Incident: misconfigured DNS caused 30-minute partial outage.",
+      "tags": [
+        "amygdala",
+        "error",
+        "incident",
+        "synthetic"
+      ],
+      "region": "amygdala",
+      "pos": [
+        -0.2527027130126953,
+        0.21824324131011963,
+        0.40202704071998596
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-23T02:04:38+00:00Z",
+      "created_at": "2026-04-23T02:04:38+00:00Z"
+    },
+    {
+      "id": "synth-22eb857f5b0b",
+      "text": "Bug discovered: unbounded retry on transient errors blew up costs.",
+      "tags": [
+        "amygdala",
+        "bug",
+        "synthetic"
+      ],
+      "region": "amygdala",
+      "pos": [
+        -0.018378378823399544,
+        -0.3560810685157776,
+        -0.09418918937444687
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-16T10:04:38+00:00Z",
+      "created_at": "2026-04-16T10:04:38+00:00Z"
+    },
+    {
+      "id": "synth-1ed87bd3dc67",
+      "text": "Warning: the cleanup script doesn't handle symlinks correctly.",
+      "tags": [
+        "amygdala",
+        "synthetic",
+        "warning"
+      ],
+      "region": "amygdala",
+      "pos": [
+        -0.11486486345529556,
+        0.20445945858955383,
+        -0.5950000286102295
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-22T06:04:38+00:00Z",
+      "created_at": "2026-04-22T06:04:38+00:00Z"
+    },
+    {
+      "id": "synth-c4cc0c24ad1c",
+      "text": "Bug: race condition in the token refresh \u2014 patched with a mutex.",
+      "tags": [
+        "amygdala",
+        "bug",
+        "bugfix",
+        "synthetic"
+      ],
+      "region": "amygdala",
+      "pos": [
+        0.42729729413986206,
+        0.22283783555030823,
+        0.49851351976394653
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-20T05:04:38+00:00Z",
+      "created_at": "2026-04-20T05:04:38+00:00Z"
+    },
+    {
+      "id": "synth-de981f5f132e",
+      "text": "Observability: Phoenix tracer wired into the OpenInference instrumentation.",
+      "tags": [
+        "corpus",
+        "observability",
+        "phoenix-tracer",
+        "synthetic"
+      ],
+      "region": "corpus_callosum",
+      "pos": [
+        0.2618919014930725,
+        -0.3331080973148346,
+        0.15851351618766785
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-05-05T13:04:38+00:00Z",
+      "created_at": "2026-05-05T13:04:38+00:00Z"
+    },
+    {
+      "id": "synth-94235bd96f18",
+      "text": "Inter-agent: auth flows go through a shared identity provider, not per-tool.",
+      "tags": [
+        "corpus",
+        "inter-agent",
+        "synthetic"
+      ],
+      "region": "corpus_callosum",
+      "pos": [
+        -0.2802702784538269,
+        0.043648649007081985,
+        -0.5720270276069641
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-04-17T18:04:38+00:00Z",
+      "created_at": "2026-04-17T18:04:38+00:00Z"
+    },
+    {
+      "id": "synth-4cc3b7c15817",
+      "text": "Bridge: deduplicated events by hash to handle dual-publish scenarios.",
+      "tags": [
+        "bridge",
+        "corpus",
+        "synthetic"
+      ],
+      "region": "corpus_callosum",
+      "pos": [
+        0.11945945769548416,
+        -0.14932432770729065,
+        -0.7374324202537537
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-23T00:04:38+00:00Z",
+      "created_at": "2026-04-23T00:04:38+00:00Z"
+    },
+    {
+      "id": "synth-8c8c6bab93f7",
+      "text": "Mitmproxy was tested for live capture but rejected as too invasive.",
+      "tags": [
+        "corpus",
+        "mitmproxy",
+        "synthetic"
+      ],
+      "region": "corpus_callosum",
+      "pos": [
+        -0.21135134994983673,
+        0.2871621549129486,
+        -0.6455405354499817
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-29T22:04:38+00:00Z",
+      "created_at": "2026-04-29T22:04:38+00:00Z"
+    },
+    {
+      "id": "synth-05f6b51c9e41",
+      "text": "Slack: status pings now include a link to the live dashboard.",
+      "tags": [
+        "corpus",
+        "slack",
+        "synthetic"
+      ],
+      "region": "corpus_callosum",
+      "pos": [
+        0.10567567497491837,
+        -0.02527027018368244,
+        -0.6501351594924927
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-21T08:04:38+00:00Z",
+      "created_at": "2026-04-21T08:04:38+00:00Z"
+    },
+    {
+      "id": "synth-bc03282d506d",
+      "text": "Observability: trace IDs propagate across all internal HTTP calls.",
+      "tags": [
+        "corpus",
+        "observability",
+        "synthetic"
+      ],
+      "region": "corpus_callosum",
+      "pos": [
+        0.13324324786663055,
+        0.49391892552375793,
+        0.19986486434936523
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-05-02T00:04:38+00:00Z",
+      "created_at": "2026-05-02T00:04:38+00:00Z"
+    },
+    {
+      "id": "synth-25bf6880e3bc",
+      "text": "Slack bridge: forwards #releases to the ops channel automatically.",
+      "tags": [
+        "bridge",
+        "corpus",
+        "slack",
+        "synthetic"
+      ],
+      "region": "corpus_callosum",
+      "pos": [
+        0.2940540611743927,
+        -0.3101351261138916,
+        0.12635135650634766
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-08T17:04:38+00:00Z",
+      "created_at": "2026-04-08T17:04:38+00:00Z"
+    },
+    {
+      "id": "synth-ebe2b3b3dc87",
+      "text": "Coordination: replaced the polling bridge with a webhook subscription.",
+      "tags": [
+        "bridge",
+        "coordination",
+        "corpus",
+        "synthetic"
+      ],
+      "region": "corpus_callosum",
+      "pos": [
+        0.06891892105340958,
+        -0.16770270466804504,
+        -0.5214864611625671
+      ],
+      "degree": 13,
+      "mentioned_at": "2026-04-29T15:04:38+00:00Z",
+      "created_at": "2026-04-29T15:04:38+00:00Z"
+    },
+    {
+      "id": "synth-84d879a7d16f",
+      "text": "AI tooling: standardized on the MCP protocol for cross-tool interop.",
+      "tags": [
+        "ai-tooling",
+        "corpus",
+        "synthetic"
+      ],
+      "region": "corpus_callosum",
+      "pos": [
+        -0.18378378450870514,
+        0.12175675481557846,
+        -0.5214864611625671
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-22T19:04:38+00:00Z",
+      "created_at": "2026-04-22T19:04:38+00:00Z"
+    },
+    {
+      "id": "synth-d51a4bbe7ee4",
+      "text": "Inter-agent contract: events use schema_version + adapter_id at the envelope.",
+      "tags": [
+        "corpus",
+        "inter-agent",
+        "synthetic"
+      ],
+      "region": "corpus_callosum",
+      "pos": [
+        -0.15162162482738495,
+        -0.20445945858955383,
+        -0.5168918967247009
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-29T17:04:38+00:00Z",
+      "created_at": "2026-04-29T17:04:38+00:00Z"
+    },
+    {
+      "id": "synth-c5b791cbd7cc",
+      "text": "Discord-bridge bot now relays threads instead of flattening them.",
+      "tags": [
+        "bridge",
+        "corpus",
+        "discord-bridge",
+        "synthetic"
+      ],
+      "region": "corpus_callosum",
+      "pos": [
+        -0.018378378823399544,
+        -0.19527027010917664,
+        -0.5904054045677185
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-05-02T06:04:38+00:00Z",
+      "created_at": "2026-05-02T06:04:38+00:00Z"
+    },
+    {
+      "id": "synth-7628ead6b6ba",
+      "text": "Bridge between MCP and OTel: same event lands in both pipelines.",
+      "tags": [
+        "bridge",
+        "corpus",
+        "synthetic"
+      ],
+      "region": "corpus_callosum",
+      "pos": [
+        -0.17000000178813934,
+        -0.15851351618766785,
+        -0.41581082344055176
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-19T01:04:38+00:00Z",
+      "created_at": "2026-04-19T01:04:38+00:00Z"
+    },
+    {
+      "id": "synth-fcc8c90f5649",
+      "text": "Creative riff: what if the dashboard played sound based on activity?",
+      "tags": [
+        "brain",
+        "creative",
+        "imagination",
+        "synthetic"
+      ],
+      "region": "brain_stem",
+      "pos": [
+        0.08729729801416397,
+        -0.10337837785482407,
+        -0.5812162160873413
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-28T13:04:38+00:00Z",
+      "created_at": "2026-04-28T13:04:38+00:00Z"
+    },
+    {
+      "id": "synth-f97cf56a4ebe",
+      "text": "Creative warm-up: rewrite a paragraph in five different voices.",
+      "tags": [
+        "brain",
+        "creative",
+        "synthetic"
+      ],
+      "region": "brain_stem",
+      "pos": [
+        -0.004594594705849886,
+        0.3101351261138916,
+        0.5674324035644531
+      ],
+      "degree": 8,
+      "mentioned_at": "2026-04-12T04:04:38+00:00Z",
+      "created_at": "2026-04-12T04:04:38+00:00Z"
+    },
+    {
+      "id": "synth-71ff4f30409b",
+      "text": "Imagination: a brain dashboard that visualizes ANY agent's activity.",
+      "tags": [
+        "art",
+        "brain",
+        "imagination",
+        "synthetic"
+      ],
+      "region": "brain_stem",
+      "pos": [
+        0.07351351529359818,
+        -0.05743243172764778,
+        -0.7741891741752625
+      ],
+      "degree": 11,
+      "mentioned_at": "2026-04-16T13:04:38+00:00Z",
+      "created_at": "2026-04-16T13:04:38+00:00Z"
+    },
+    {
+      "id": "synth-d33ea6b724de",
+      "text": "Generation: drafted three logo concepts for the project \u2014 picking one tomorrow.",
+      "tags": [
+        "brain",
+        "creative",
+        "generation",
+        "synthetic"
+      ],
+      "region": "brain_stem",
+      "pos": [
+        -0.09189189225435257,
+        0.5490540266036987,
+        0.011486486531794071
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-22T18:04:38+00:00Z",
+      "created_at": "2026-04-22T18:04:38+00:00Z"
+    },
+    {
+      "id": "synth-4888eb354f07",
+      "text": "Dream: a CLI that genuinely understands intent, not just commands.",
+      "tags": [
+        "brain",
+        "dream",
+        "synthetic"
+      ],
+      "region": "brain_stem",
+      "pos": [
+        -0.045945946127176285,
+        0.3468918800354004,
+        0.2779729664325714
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-29T12:04:38+00:00Z",
+      "created_at": "2026-04-29T12:04:38+00:00Z"
+    },
+    {
+      "id": "synth-a550cba80ef2",
+      "text": "Art project idea: synaesthetic timer \u2014 color shifts as time passes.",
+      "tags": [
+        "art",
+        "brain",
+        "creative",
+        "synthetic"
+      ],
+      "region": "brain_stem",
+      "pos": [
+        -0.041351351886987686,
+        -0.05743243172764778,
+        -0.5582432150840759
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-26T03:04:38+00:00Z",
+      "created_at": "2026-04-26T03:04:38+00:00Z"
+    },
+    {
+      "id": "synth-cdc993b86bac",
+      "text": "Generation prompt template: tone + audience + format + 1 surprising element.",
+      "tags": [
+        "brain",
+        "generation",
+        "synthetic"
+      ],
+      "region": "brain_stem",
+      "pos": [
+        0.611081063747406,
+        -0.10797297209501266,
+        0.11256756633520126
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-05-02T16:04:38+00:00Z",
+      "created_at": "2026-05-02T16:04:38+00:00Z"
+    },
+    {
+      "id": "synth-68d53542e700",
+      "text": "Imagination: anatomical brain skin for any chat agent.",
+      "tags": [
+        "brain",
+        "imagination",
+        "synthetic"
+      ],
+      "region": "brain_stem",
+      "pos": [
+        0.18378378450870514,
+        0.23202702403068542,
+        0.41581082344055176
+      ],
+      "degree": 8,
+      "mentioned_at": "2026-04-23T22:04:38+00:00Z",
+      "created_at": "2026-04-23T22:04:38+00:00Z"
+    },
+    {
+      "id": "synth-ee56e7a959d5",
+      "text": "Dream: a static-site generator that's actually fast and actually pretty.",
+      "tags": [
+        "brain",
+        "dream",
+        "synthetic"
+      ],
+      "region": "brain_stem",
+      "pos": [
+        0.5145946145057678,
+        0.02527027018368244,
+        0.28256756067276
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-14T14:04:38+00:00Z",
+      "created_at": "2026-04-14T14:04:38+00:00Z"
+    },
+    {
+      "id": "synth-56abe3a0d4d8",
+      "text": "Art: pixel-perfect 3D model of a familiar object, then animate it.",
+      "tags": [
+        "art",
+        "brain",
+        "synthetic"
+      ],
+      "region": "brain_stem",
+      "pos": [
+        -0.23891891539096832,
+        -0.328513503074646,
+        0.11256756633520126
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-23T07:04:38+00:00Z",
+      "created_at": "2026-04-23T07:04:38+00:00Z"
+    },
+    {
+      "id": "synth-e529fb9c4a80",
+      "text": "Creative pattern: every release ships with one delight, however small.",
+      "tags": [
+        "brain",
+        "creative",
+        "synthetic"
+      ],
+      "region": "brain_stem",
+      "pos": [
+        -0.05513513460755348,
+        -0.3422972857952118,
+        -0.5168918967247009
+      ],
+      "degree": 10,
+      "mentioned_at": "2026-04-19T06:04:38+00:00Z",
+      "created_at": "2026-04-19T06:04:38+00:00Z"
+    },
+    {
+      "id": "synth-ffb1ab1ef3c3",
+      "text": "Generative palette: pick three colors, get a balanced 10-color theme.",
+      "tags": [
+        "brain",
+        "generation",
+        "synthetic"
+      ],
+      "region": "brain_stem",
+      "pos": [
+        0.05972972884774208,
+        -0.15391892194747925,
+        -0.48932433128356934
+      ],
+      "degree": 9,
+      "mentioned_at": "2026-05-05T14:04:38+00:00Z",
+      "created_at": "2026-05-05T14:04:38+00:00Z"
+    }
+  ],
+  "schema_version": "1.0",
+  "synthetic": true,
+  "comment": "Fully synthetic dataset \u2014 no real personal data. Generated by tools/generate_synthetic_memories.py from a curated pool of generic developer/AI memory examples. Used by the Pages static demo and as a reference structure for new installs."
+}

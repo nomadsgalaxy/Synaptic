@@ -1,0 +1,29 @@
+{
+  "name": "synaptic-otel",
+  "version": "0.1.0",
+  "description": "OTLP receiver that translates OpenTelemetry traces (Anthropic/OpenAI/OpenInference instrumentations) into Synaptic events. Listens on :4318/v1/traces, accepts both HTTP/JSON and HTTP/Protobuf, forwards to SD Core.",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "synaptic-otel": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "opentelemetry",
+    "otlp",
+    "synaptic",
+    "observability",
+    "openinference",
+    "genai"
+  ],
+  "author": "Anthony Dragone",
+  "license": "SEE LICENSE IN ../../LICENSE",
+  "dependencies": {
+    "protobufjs": "^7.4.0"
+  }
+}

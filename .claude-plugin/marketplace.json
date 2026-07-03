@@ -1,0 +1,15 @@
+{
+  "name": "synaptic",
+  "owner": {
+    "name": "Anthony Dragone",
+    "url": "https://github.com/nomadsgalaxy"
+  },
+  "description": "Plugins that integrate with the Synaptic live brain dashboard — bidirectional event forwarding plus MCP tools for memory recall, Tier 3 Oracle research, audit/budget observability, and sensitive-flag management.",
+  "plugins": [
+    {
+      "name": "synaptic-claude-code",
+      "source": "./bridge/claude-code-plugin",
+      "description": "Hooks forward Claude Code events (PreToolUse, PostToolUse, UserPromptSubmit, SessionStart/End, SubagentStop, Stop) into the Synaptic dashboard. The bundled MCP server (synaptic) ships 18 tools so Claude can sd_recall, sd_reflect (Tier 3 synthesis over local results), sd_research, sd_list_memories, sd_get_memory, sd_update_memory, sd_get_audit, sd_get_budget, plus the legacy report_event / report_memory_save. Slash commands /sd-recall, /sd-research, /sd-status, /sd-flag wrap the highest-value flows."
+    }
+  ]
+}

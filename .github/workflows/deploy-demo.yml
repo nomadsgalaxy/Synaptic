@@ -1,0 +1,68 @@
+# Phase 4 D5 — auto-deploy a public demo to GitHub Pages.
+#
+# Triggers:
+#   - Manual run via "Run workflow" in the Actions tab.
+#   - Auto-runs on push to main if you uncomment the `push:` block below.
+#
+# What it does:
+#   1. Generates synthetic memories (no personal data).
+#   2. Builds release/ via tools/build_release.py (debug hooks stripped,
+#      synthetic data swapped, deprecated PLY meshes excluded).
+#   3. Uploads release/ as a GitHub Pages artifact and deploys.
+#
+# Once enabled, the demo lives at:
+#     https://<owner>.github.io/<repo>/
+#
+# The dashboard runs in mock mode there (no SD Core, no Ollama) — visitors
+# see the brain animate from synthetic events; classifier falls back to
+# keyword-only and bubbles use the pre-baked pool.
+name: Deploy demo to GitHub Pages
+
+on:
+  workflow_dispatch:
+  # Uncomment to auto-deploy on every push to main:
+  # push:
+  #   branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate synthetic memories
+        run: python tools/generate_synthetic_memories.py
+
+      - name: Build release artifact
+        run: python tools/build_release.py
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: release
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

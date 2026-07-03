@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "synaptic"
+version = "0.1.0"
+description = "Tiny client for emitting Synaptic activity events from any Python agent or instrumentation."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "OCL-pending" }
+authors = [{ name = "Anthony Dragone" }]
+keywords = ["synaptic", "observability", "dashboard", "ai-agents"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Libraries",
+  "Operating System :: OS Independent",
+]
+# Pure stdlib — no runtime dependencies.
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/nomadsgalaxy/Synaptic-Disorder"
+Source = "https://github.com/nomadsgalaxy/Synaptic-Disorder/tree/main/bridge/sdk/python"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["synaptic*"]

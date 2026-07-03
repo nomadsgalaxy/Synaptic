@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Synaptic — an agent-driven indexed memory store for AI. Your agent queries; Synaptic remembers, organizes, and surfaces. Memories live as neurons in anatomical regions; a nightly dream cycle consolidates, prunes, and recombines them like a sleeping brain. Grounded in 25 peer-reviewed neuroscience studies.">
+  <title>Synaptic · Agent-driven memory store for AI</title>
+  <style>
+    /* Dashboard-derived theme — same Medical palette so the site reads as
+       part of the same product. Pure static HTML, no build step, no JS. */
+    :root {
+      --bg-outer: #06080a;
+      --bg-inner: #0c1014;
+      --hud-primary: #7af2ff;
+      --hud-secondary: #5b8d9b;
+      --hud-grid: #1d2a30;
+      --hud-warn: #ffb86b;
+      --hud-fire: #66ff99;
+      --code-bg: #0a1216;
+      --code-border: #1a2630;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      font-family: ui-sans-serif, -apple-system, "SF Pro Text", system-ui, sans-serif;
+      background: radial-gradient(ellipse at top, var(--bg-inner) 0%, var(--bg-outer) 80%);
+      color: #d6e8ee;
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(var(--hud-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--hud-grid) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.18;
+      z-index: 0;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 64px 28px 80px;
+      position: relative;
+      z-index: 1;
+    }
+    header { text-align: center; margin-bottom: 56px; }
+    .logo-mark {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--hud-secondary);
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: clamp(34px, 5vw, 52px);
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin: 0 0 18px 0;
+      color: var(--hud-primary);
+      text-shadow: 0 0 24px rgba(122, 242, 255, 0.25);
+    }
+    .lede {
+      font-size: 18px;
+      color: #a8c0c8;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    h2 {
+      font-size: 22px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--hud-primary);
+      margin: 56px 0 18px 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--hud-grid);
+    }
+    h3 {
+      font-size: 15px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--hud-secondary);
+      margin: 32px 0 12px 0;
+    }
+    p { margin: 12px 0; }
+    a { color: var(--hud-primary); }
+    a:hover { text-shadow: 0 0 8px rgba(122, 242, 255, 0.5); }
+    code {
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 13px;
+      background: var(--code-bg);
+      padding: 1px 6px;
+      border-radius: 3px;
+      border: 1px solid var(--code-border);
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-left: 2px solid var(--hud-primary);
+      padding: 14px 18px;
+      overflow-x: auto;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.55;
+      border-radius: 0 4px 4px 0;
+    }
+    pre code { background: transparent; padding: 0; border: none; }
+    .quick {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin: 24px 0 0 0;
+    }
+    .quick a {
+      display: block;
+      padding: 14px 18px;
+      background: rgba(122, 242, 255, 0.04);
+      border: 1px solid var(--hud-grid);
+      text-decoration: none;
+      color: #d6e8ee;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .quick a:hover {
+      border-color: var(--hud-primary);
+      transform: translateY(-1px);
+    }
+    .quick a strong {
+      display: block;
+      color: var(--hud-primary);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+    .columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 16px;
+    }
+    @media (max-width: 720px) { .columns { grid-template-columns: 1fr; } }
+    details {
+      background: rgba(122, 242, 255, 0.025);
+      border: 1px solid var(--hud-grid);
+      padding: 14px 18px;
+      margin: 8px 0;
+    }
+    details[open] { border-color: var(--hud-primary); }
+    summary {
+      cursor: pointer;
+      color: var(--hud-primary);
+      font-weight: 500;
+    }
+    summary::-webkit-details-marker { color: var(--hud-secondary); }
+    .note {
+      border-left: 2px solid var(--hud-warn);
+      padding: 10px 16px;
+      background: rgba(255, 184, 107, 0.04);
+      color: #d6e8ee;
+      font-size: 14px;
+      margin: 16px 0;
+    }
+    footer {
+      margin-top: 80px;
+      padding-top: 28px;
+      border-top: 1px solid var(--hud-grid);
+      text-align: center;
+      color: var(--hud-secondary);
+      font-size: 13px;
+    }
+    footer a { margin: 0 8px; }
+    .hero-brain {
+      /* No background, no glow — the GIF was rendered with a transparent
+         background so it blends with the page's radial gradient and looks
+         like the live dashboard. */
+      display: block;
+      margin: 24px auto 32px auto;
+      max-width: min(560px, 100%);
+      width: 100%;
+      height: auto;
+    }
+    /* Atlas screen mocks — ASCII-style panels showing dashboard surfaces */
+    .atlas-mock {
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-left: 2px solid var(--hud-primary);
+      padding: 14px 18px;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.5;
+      color: #cfe5ec;
+      white-space: pre;
+      overflow-x: auto;
+      margin: 14px 0 22px 0;
+    }
+    .atlas-mock-caption {
+      font-size: 12px;
+      color: var(--hud-secondary);
+      margin-top: -16px;
+      margin-bottom: 22px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    /* Phase / capability tile grid */
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin: 18px 0 8px 0;
+    }
+    .tile {
+      padding: 14px 18px;
+      background: rgba(122, 242, 255, 0.03);
+      border: 1px solid var(--hud-grid);
+    }
+    .tile-num {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: var(--hud-secondary);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .tile-title {
+      color: var(--hud-primary);
+      font-size: 14px;
+      letter-spacing: 0.03em;
+      margin-bottom: 8px;
+    }
+    .tile-body {
+      font-size: 13px;
+      color: #b8cfd6;
+      line-height: 1.5;
+    }
+    /* Citation list — compact + scannable */
+    .cite-list { font-size: 13px; line-height: 1.6; }
+    .cite-list .cite {
+      padding: 10px 14px;
+      border-left: 1px solid var(--hud-grid);
+      margin: 4px 0;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .cite-list .cite:hover {
+      border-left-color: var(--hud-primary);
+      background: rgba(122, 242, 255, 0.025);
+    }
+    .cite-num {
+      display: inline-block;
+      width: 28px;
+      color: var(--hud-secondary);
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+    }
+    .cite-authors { color: var(--hud-primary); font-weight: 500; }
+    .cite-title { color: #d6e8ee; font-style: italic; }
+    .cite-venue { color: #98aeb6; font-size: 12px; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="logo-mark">SYNAPTIC · AGENT-DRIVEN MEMORY · v3.0.0b1</div>
+    <h1>An Indexed Memory Store for Your Agent</h1>
+    <p class="lede">Synaptic is the memory layer underneath your agent — a queryable, biologically-inspired indexed store with a 3D brain dashboard showing what your agent is thinking. Your agent does the reasoning; Synaptic remembers, organizes, and surfaces what's relevant. Built on a foundation of peer-reviewed neuroscience research.</p>
+    <img class="hero-brain"
+         src="synaptic-disorder.gif"
+         alt="A 3D rendering of a brain visualization. Neurons (glowing dots) are placed in anatomical regions; synaptic pathways pulse between them as the brain rotates."
+         loading="lazy"
+         decoding="async"
+         width="560"
+         height="560">
+  </header>
+
+  <section class="quick">
+    <a href="#why"><strong>Why Organic Memory?</strong>Utilization of natural processses to optimize cycles.</a>
+    <a href="#dream-cycle"><strong>Electric Sheep</strong>What the system does while it sleeps.</a>
+    <a href="#atlas"><strong>Medical Dashboard</strong>Inspired by Sci-Fi Medical Records, your data comes to life</a>
+    <a href="#science"><strong>The science</strong>The 25 peer reviewed studies the architecture is built on.</a>
+    <a href="#install"><strong>Install</strong>Get it running in a couple minutes.</a>
+    <a href="#adapters"><strong>Wire your AI</strong>Claude Code, MCP, OTel, custom SDK.</a>
+  </section>
+
+  <h2 id="why">Why an organic memory manager</h2>
+
+  <p>I started this project with a relatively simple goal; I wanted to see what my agents looked like when they were thinking. I wanted to see the gears in the machine spinning and churning away. I wanted to see the patterns, the way they connect to one another. I wanted to see the forest for the trees. I found that the memory managers I was using did a great job at managing memories, but not really explaining the relationship between them.</p>
+
+  <p>So, I built the brain visualizer, and it helped me better understand the relationships between memory modules, but as I looked at this bundle of neruons and synapses I stitched together, I realized that I was one step away from a full memory management system. I was already storing the memories, indexing and sorting them, but I was using my agent's tokens to help tag things as they were stored, and the other multi-agent memory manager I was using needed an external API to process incoming memories. It's just indexing, why not run it locally?</p>
+
+  <p>So, by the time I added a local 3.1b Ollama agent in a docker container to index the memories for me and build the synapses, I discovered I could take this a step further, and build a full on custom memory manager that didn't rely on external API, but could also be built from the ground up to include advance features I wanted to add as a cost saving measure. That's when I came up with the idea of running the system when the host PC or server is idle, and since I was running wild with Brain terminology, I referred to it as Dreaming, and that's when it all clicked.</p>
+
+  <p>A week later, and I built a fully functional memory manager inspired by how we humans store and retrieve memories, powered by the actuall sciecnce that explains how we ourselves do it. What started as a visualizer, became this system that could grow with it's user, associate and develop complex neural connections between memories, and slowly archive inactive ones into a long term archive. All the benefits of the Human OS, without the data loss.</p>
+
+  <h3>The architecture: agent does the thinking, Synaptic does the remembering</h3>
+  <p>Synaptic is not trying to out-think your agent. The capable LLM you're already using (Claude, GPT, your local Ollama) is far better at understanding questions and synthesizing answers than any classifier we could embed here. So Synaptic stays in its lane: it's the queryable, indexed memory layer the agent calls into. Your agent decides what to retrieve via <code>/recall</code>; Synaptic returns the ranked memories; your agent reads them and answers. We don't try to be the smartest piece of the stack — we try to be the most useful memory underneath it.</p>
+
+  <div class="columns">
+    <div>
+      <h3>What's wrong with traditional memories?</h3>
+      <ul>
+        <li>LLM Memories are just more text to be processed in the current context, bloating more and more ovet time.</li>
+        <li>Recall quality degrades over time as the embedding space saturates.</li>
+        <li>The system never <em>thinks about</em> its own contents — it just retrieves them.</li>
+        <li>Surprising connections between distant memories never surface unless you ask the exact right query.</li>
+        <li>There's no concept of <em>understanding</em> a topic — just facts arrayed against each other.</li>
+        <li>If tags aren't strictly curated, they can fragment or mislabel, causing recall to fail.</li>
+        <li>The Memory System doesn't teach what's important: The How and The Why, only fact strung together.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>What Synaptic does differently</h3>
+      <ul>
+        <li><strong>Triage</strong> — every memory gets a salience score; weak ones decay, strong ones reinforce.</li>
+        <li><strong>Consolidation</strong> — duplicate memories merge; clusters synthesize into single richer entries.</li>
+        <li><strong>Cross-region bridges</strong> — surprising connections between distant memories surface automatically.</li>
+        <li><strong>Schemas</strong> — the system abstracts patterns from groups of related memories, developing complex pathways</li>
+        <li><strong>Replay</strong> — REM-style recombination produces new associations the traditional tagging can't explicitly develop on it's own.</li>
+        <li><strong>Context memory</strong> — composite frameworks distilled from many specific experiences develop habits and patterns</li>
+        <li><strong>Archival</strong> — Old Memories lose salience, Synaptic archives them, preventing halluciantions of outdated info.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 id="dream-cycle">Do Agents Dream of Electric Sheep?</h2>
+
+  <p>Once a night (or on demand), Synaptic runs a 12-phase consolidation pipeline modelled on biological sleep stages. Each phase corresponds to a real brain mechanism. You can see every phase fire in the Dream Journal panel; you can tune any of them; you can read about why it exists in the citation linked from the panel.</p>
+
+  <div class="tiles">
+    <div class="tile">
+      <div class="tile-num">PHASE 0a</div>
+      <div class="tile-title">Light encoding</div>
+      <div class="tile-body">Embed each new memory via Tier 1 model, classify into one of 14 anatomical regions, mark <code>light_encoded</code>. Sub-second per memory.</div>
+    </div>
+    <div class="tile">
+      <div class="tile-num">PHASE 0b</div>
+      <div class="tile-title">Deep enrichment (REM-style)</div>
+      <div class="tile-body">Per-memory Tier 2 re-summarisation, retag, region refinement. Resumable across runs; raw text is preserved (R10 immutability) — refined output lives in <code>enriched_text</code>.</div>
+    </div>
+    <div class="tile">
+      <div class="tile-num">PHASE 1</div>
+      <div class="tile-title">Dedup</div>
+      <div class="tile-body">Cosine-NN merges near-duplicates. Older memory retains; merged-from list preserves provenance.</div>
+    </div>
+    <div class="tile">
+      <div class="tile-num">PHASE 2</div>
+      <div class="tile-title">Synthesis</div>
+      <div class="tile-body">Cluster similar memories into a single richer one. The synthesis lists its sources; sources stay searchable.</div>
+    </div>
+    <div class="tile">
+      <div class="tile-num">PHASE 5</div>
+      <div class="tile-title">SHY weighted decay</div>
+      <div class="tile-body">Synaptic homeostasis. Decay multiplier scaled by salience + recall + schema fit. Weak memories fade; strong ones stay.</div>
+    </div>
+    <div class="tile">
+      <div class="tile-num">PHASE 7</div>
+      <div class="tile-title">Cross-region bridges</div>
+      <div class="tile-body">Two-pool design: high-cosine NN for the obvious, low-cosine + shared rare tags for the surprising. The latter is where genuine creativity lives.</div>
+    </div>
+    <div class="tile">
+      <div class="tile-num">PHASE 8</div>
+      <div class="tile-title">Schema formation</div>
+      <div class="tile-body">Abstracts patterns from groups of related syntheses. Schemas decay if not reinforced; survive only if the user keeps engaging with the topic.</div>
+    </div>
+    <div class="tile">
+      <div class="tile-num">PHASE 8.5</div>
+      <div class="tile-title">Schema reframing</div>
+      <div class="tile-body">For each schema, finds prior memories drifting toward its abstraction and links them as sources. Text never rewritten.</div>
+    </div>
+    <div class="tile">
+      <div class="tile-num">PHASE 8.7</div>
+      <div class="tile-title">Context memory (planned)</div>
+      <div class="tile-body">REM-style composite frameworks distilled from many specific events in the same context. The "operational understanding" of a topic.</div>
+    </div>
+    <div class="tile">
+      <div class="tile-num">PHASE 9</div>
+      <div class="tile-title">Reinforcement + rebalancing</div>
+      <div class="tile-body">Bumps strength on recalled + weak-but-salient memories. Then a global rebalance keeps the recall-strength distribution well-shaped.</div>
+    </div>
+    <div class="tile">
+      <div class="tile-num">PHASE 10</div>
+      <div class="tile-title">Replay</div>
+      <div class="tile-body">REM-style narrative replays mix recent and pre-existing memories. Outputs feed back into Phase 7 + 8 as new associations.</div>
+    </div>
+    <div class="tile">
+      <div class="tile-num">PHASE 12</div>
+      <div class="tile-title">Dream entry</div>
+      <div class="tile-body">A short generated prose entry summarising what consolidated. Surreal, archetype-tagged, written in dream voice. Your morning record of how the system thought about its bank overnight.</div>
+    </div>
+  </div>
+
+  <h2 id="atlas">The Atlas</h2>
+
+  <p>The dashboard's Atlas Connectome Explorer is where you actually look at your AI's mind. Eight tabs, each with focused sub-pages. Here's what you'll see when you walk through it.</p>
+
+  <h3>CT Scan — live activity</h3>
+  <img src="CT Scan.jpg" alt="Brain page" width="100%" />
+  <p></p>
+  <p class="atlas-mock-caption">A CT Scan of your Agents' memory bank. Each bright spot is an active Memory, and every strand a Synapse.</p>
+
+  <h3>Dream Journal — last night's work</h3>
+  <img src="Dream.png" alt="Dream Journal" width="100%" />
+  <p></p>
+  <p class="atlas-mock-caption">Dream Journal: progress card + generated dream entry per nightly run, with archetype caption + expandable phase details.</p>
+
+  <h3>Maps — concepts, projects, people, technologies</h3>
+  <img src="Maps.png" alt="Maps" width="100%" />
+  <p></p>
+  <p class="atlas-mock-caption">Maps. Connected Topics in your Agents' memory bank.</p>
+
+  <h3>Trace detail — a single memory's lifecycle</h3>
+  <img src="Trace.png" alt="Trace" width="100%" />
+  <p></p>
+  <p class="atlas-mock-caption">Trace detail: lifecycle badges, salience, recall strength, synthesis lineage, surprising cross-region partners.</p>
+
+  <h2 id="capabilities">What it can do</h2>
+
+  <div class="columns">
+    <div>
+      <h3>For the AI agent</h3>
+      <ul>
+        <li><strong>Auto-classified memories</strong> — every saved memory lands in the right brain region without manual tagging</li>
+        <li><strong>Recall that improves over time</strong> — recently used memories get reinforced, irrelevant ones decay</li>
+        <li><strong>Surprising associations</strong> — the cross-region bridges surface connections you didn't know to ask about</li>
+        <li><strong>Schemas</strong> — abstract patterns the agent can use to reason about families of memories</li>
+        <li><strong>Tier 3 research augmentation</strong> — when a topic is thinly populated, the system can fill it via OpenAI / Anthropic / local AirLLM</li>
+        <li><strong>Sensitive-aware</strong> — flagged memories never reach Tier 3 or external egress; redacted in audit; sticky-on policy</li>
+      </ul>
+    </div>
+    <div>
+      <h3>For you</h3>
+      <ul>
+        <li><strong>A morning dream entry</strong> — short surreal prose summarizing what consolidated overnight</li>
+        <li><strong>Live brain visualization</strong> — see your AI's "mind" pulse as it works in real time</li>
+        <li><strong>Map view</strong> — what concepts/projects/people/technologies are in the bank</li>
+        <li><strong>Atlas search</strong> — "/" anywhere; prefix-scoped, ranked, recent-history-aware</li>
+        <li><strong>Audit log</strong> — every consolidation operation, with before/after diffs</li>
+        <li><strong>Privacy panel</strong> — what's flagged sensitive and why</li>
+        <li><strong>Per-tier model controls</strong> — local Ollama, OpenAI, Anthropic, AirLLM</li>
+        <li><strong>Mobile + remote</strong> — Cloudflare Tunnel + bearer-token auth; works from any network</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 id="science">The science</h2>
+
+  <p>Synaptic's architecture is grounded in 25 peer-reviewed studies on memory, sleep, and consolidation. Every nightly phase maps to a specific finding; every refinement we've shipped (R1 through R15) cites a source. The citations below are not decoration — they are the load-bearing structure of the system.</p>
+
+  <p>If you're citing Synaptic in academic work, please also cite the underlying primary sources. The architecture is novel; the mechanisms it implements are not.</p>
+
+  <h3>Foundations — system + synaptic consolidation</h3>
+  <div class="cite-list">
+    <div class="cite"><span class="cite-num">[1]</span> <span class="cite-authors">Stickgold &amp; Walker</span> (2013). <span class="cite-title">Sleep-dependent memory triage: Evolving generalization through selective processing.</span> <span class="cite-venue">Nature Neuroscience, 11(2), 139-145.</span></div>
+    <div class="cite"><span class="cite-num">[2]</span> <span class="cite-authors">Stickgold &amp; Walker</span> (2010). <span class="cite-title">Overnight alchemy: Sleep-dependent memory evolution.</span> <span class="cite-venue">Nature Reviews Neuroscience, 11(3), 218.</span></div>
+    <div class="cite"><span class="cite-num">[3]</span> <span class="cite-authors">Paller, Creery &amp; Schechtman</span> (2021). <span class="cite-title">Memory and sleep: How sleep cognition can change the waking mind for the better.</span> <span class="cite-venue">Annual Review of Psychology, 72, 123-150.</span></div>
+  </div>
+
+  <h3>Synaptic homeostasis (SHY)</h3>
+  <div class="cite-list">
+    <div class="cite"><span class="cite-num">[4]</span> <span class="cite-authors">Tononi &amp; Cirelli</span> (2014). <span class="cite-title">Sleep and the price of plasticity: From synaptic and cellular homeostasis to memory consolidation and integration.</span> <span class="cite-venue">Neuron, 81(1), 12-34.</span></div>
+    <div class="cite"><span class="cite-num">[5]</span> <span class="cite-authors">Tononi &amp; Cirelli</span> (2020). <span class="cite-title">Sleep and synaptic down-selection.</span> <span class="cite-venue">European Journal of Neuroscience, 51(1), 413-421.</span></div>
+  </div>
+
+  <h3>Hippocampal replay and sharp-wave ripples</h3>
+  <div class="cite-list">
+    <div class="cite"><span class="cite-num">[6]</span> <span class="cite-authors">Buzsaki</span> (2015). <span class="cite-title">Hippocampal sharp wave-ripple: A cognitive biomarker for episodic memory and planning.</span> <span class="cite-venue">Hippocampus, 25(10), 1073-1188.</span></div>
+    <div class="cite"><span class="cite-num">[7]</span> <span class="cite-authors">Schapiro, McDevitt, Rogers, Mednick &amp; Norman</span> (2018). <span class="cite-title">Human hippocampal replay during rest prioritizes weakly learned information and predicts memory performance.</span> <span class="cite-venue">Nature Communications, 9(1), 3920.</span></div>
+    <div class="cite"><span class="cite-num">[8]</span> <span class="cite-authors">Lewis, Knoblich &amp; Poe</span> (2018). <span class="cite-title">How memory replay in sleep boosts creative problem-solving.</span> <span class="cite-venue">Trends in Cognitive Sciences, 22(6), 491-503.</span></div>
+  </div>
+
+  <h3>Synaptic tagging and capture</h3>
+  <div class="cite-list">
+    <div class="cite"><span class="cite-num">[9]</span> <span class="cite-authors">Ibrahim, Wang &amp; Sajikumar</span> (2024). <span class="cite-title">Synapses tagged, memories kept: Synaptic tagging and capture hypothesis in brain health and disease.</span> <span class="cite-venue">Philosophical Transactions of the Royal Society B, 379(1906), 20230237.</span></div>
+    <div class="cite"><span class="cite-num">[10]</span> <span class="cite-authors">Moncada, Ballarini &amp; Viola</span> (2015). <span class="cite-title">Behavioral tagging: A translation of the synaptic tagging and capture hypothesis.</span> <span class="cite-venue">Neural Plasticity, 2015, 650780.</span></div>
+  </div>
+
+  <h3>Sleep-dependent transformation</h3>
+  <div class="cite-list">
+    <div class="cite"><span class="cite-num">[11]</span> <span class="cite-authors">Lacaux, Andrillon, Bastoul, Idir, Fonteix-Galet, Arnulf &amp; Oudiette</span> (2021). <span class="cite-title">Sleep onset is a creative sweet spot.</span> <span class="cite-venue">Science Advances, 7(50), eabj5866.</span></div>
+  </div>
+
+  <h3>Schema integration</h3>
+  <div class="cite-list">
+    <div class="cite"><span class="cite-num">[12]</span> <span class="cite-authors">Aghayan Golkashani, Ghorbani, Leong, Ong &amp; Chee</span> (2023). <span class="cite-title">Advantage conferred by overnight sleep on schema-related memory may last only a day.</span> <span class="cite-venue">SLEEP Advances, 4(1), zpad019.</span></div>
+    <div class="cite"><span class="cite-num">[13]</span> <span class="cite-authors">Ashton, Staresina &amp; Cairney</span> (2022). <span class="cite-title">Sleep bolsters schematically incongruent memories.</span> <span class="cite-venue">PLOS One, 17(7), e0269439.</span></div>
+  </div>
+
+  <h3>Emotional memory and selectivity at encoding</h3>
+  <div class="cite-list">
+    <div class="cite"><span class="cite-num">[14]</span> <span class="cite-authors">Payne &amp; Kensinger</span> (2018). <span class="cite-title">Stress, sleep, and the selective consolidation of emotional memories.</span> <span class="cite-venue">Current Opinion in Behavioral Sciences, 19, 36-43.</span></div>
+    <div class="cite"><span class="cite-num">[15]</span> <span class="cite-authors">Hutchison &amp; Rathore</span> (2015). <span class="cite-title">The role of REM sleep theta activity in emotional memory.</span> <span class="cite-venue">Frontiers in Psychology, 6, 1439.</span></div>
+    <div class="cite"><span class="cite-num">[16]</span> <span class="cite-authors">Nishida, Pearsall, Buckner &amp; Walker</span> (2009). <span class="cite-title">REM sleep, prefrontal theta, and the consolidation of human emotional memory.</span> <span class="cite-venue">Cerebral Cortex, 19(5), 1158-1166.</span></div>
+  </div>
+
+  <h3>REM-specific mechanisms (and the skeptical view)</h3>
+  <div class="cite-list">
+    <div class="cite"><span class="cite-num">[17]</span> <span class="cite-authors">Liu, Pikovsky, Cohen et al.</span> (2023). <span class="cite-title">Human REM sleep recalibrates neural activity in support of memory formation.</span> <span class="cite-venue">Science Advances, 9(34), eadj1895.</span></div>
+    <div class="cite"><span class="cite-num">[18]</span> <span class="cite-authors">Johnson</span> (2005). <span class="cite-title">REM sleep and the development of context memory.</span> <span class="cite-venue">Medical Hypotheses, 64(3), 499-504.</span></div>
+    <div class="cite"><span class="cite-num">[19]</span> <span class="cite-authors">Siegel</span> (2001). <span class="cite-title">The REM sleep-memory consolidation hypothesis.</span> <span class="cite-venue">Science, 294(5544), 1058-1063.</span></div>
+    <div class="cite"><span class="cite-num">[20]</span> <span class="cite-authors">Sarangi &amp; Paital</span> (2021). <span class="cite-title">Association between REM sleep and strengthening memory: A mini review.</span> <span class="cite-venue">Journal of Clinical Images and Medical Case Reports, 2(6), 1451.</span></div>
+    <div class="cite"><span class="cite-num">[21]</span> <span class="cite-authors">Liu, Chen, Xia, Zeng, Xue &amp; Hu</span> (2025). <span class="cite-title">Slow-wave sleep and REM sleep differentially contribute to memory representational transformation.</span> <span class="cite-venue">Communications Biology, 8, 1302.</span></div>
+  </div>
+
+  <h3>Forgetting and pruning</h3>
+  <div class="cite-list">
+    <div class="cite"><span class="cite-num">[22]</span> <span class="cite-authors">Poe</span> (2017). <span class="cite-title">Sleep is for forgetting.</span> <span class="cite-venue">Journal of Neuroscience, 37(3), 464-473.</span></div>
+    <div class="cite"><span class="cite-num">[23]</span> <span class="cite-authors">Genzel &amp; Wixted</span> (2019). <span class="cite-title">Cellular and systems consolidation of declarative memory.</span> <span class="cite-venue">Frontiers in Cellular Neuroscience, 13, 71.</span></div>
+  </div>
+
+  <h3>REM-specific recombination + bizarre dream content</h3>
+  <div class="cite-list">
+    <div class="cite"><span class="cite-num">[24]</span> <span class="cite-authors">Cai, Mednick, Harrison, Kanady &amp; Mednick</span> (2009). <span class="cite-title">REM, not incubation, improves creativity by priming associative networks.</span> <span class="cite-venue">PNAS, 106(25), 10130-10134.</span></div>
+    <div class="cite"><span class="cite-num">[25]</span> <span class="cite-authors">Wamsley, Trost &amp; Tucker</span> (2024). <span class="cite-title">Memory updating in dreams.</span> <span class="cite-venue">SLEEP Advances, 5(1), zpae096.</span></div>
+  </div>
+
+  <p style="margin-top:24px;"><a href="https://github.com/nomadsgalaxy/Synaptic-Disorder/blob/main/docs/research/CITATIONS.md">Full citations with mapping to architectural decisions →</a></p>
+
+  <h2 id="install">Install</h2>
+
+  <h3>Option A — Everything in Docker</h3>
+  <pre><code>git clone https://github.com/nomadsgalaxy/Synaptic-Disorder.git
+cd synaptic-disorder
+docker compose up
+# open http://localhost:9911</code></pre>
+  <p>Brings up the SD Core stack: a single Go binary that serves the dashboard, hosts the API + WebSocket, runs the consolidation pipeline, persists memories to SQLite. Plus per-tier Ollama containers (one per LLM model so each can be spun up on demand). No Python on host, no Node, no manual <code>ollama pull</code>.</p>
+
+  <h3>Option B — Mock-only dashboard (no backend)</h3>
+  <pre><code>python serve.py
+# Dashboard at http://localhost:8765</code></pre>
+  <p>Brain runs on the built-in mock event engine. Real adapter events can't reach it without SD Core; useful for evaluating the UI before committing to the full install.</p>
+
+  <h3>Option C — Native Go binary (no Docker)</h3>
+  <pre><code>cd bridge/core
+go build -o sd-core .
+./sd-core --listen 127.0.0.1:9911 --data-dir ../..</code></pre>
+  <p>Single Go binary, ~15 MB static, no glibc dependency. Native Ollama for thought-bubble generation: <code>ollama serve &amp; ollama pull llama3.2:3b</code>.</p>
+
+  <div class="note">
+    <strong>For lower-spec hardware</strong> (Raspberry Pi 4/5), use a smaller model:
+    <pre><code>SD_OLLAMA_MODEL=llama3.2:1b docker compose up</code></pre>
+    Pi-friendly options include <code>qwen2.5:0.5b</code>, <code>tinyllama:1.1b</code>, <code>gemma2:2b</code>, <code>phi3:mini</code>.
+  </div>
+
+  <h3>Remote operation</h3>
+  <p>Run the dashboard on one machine, wire AI clients on others. See <a href="https://github.com/nomadsgalaxy/Synaptic-Disorder/blob/main/docs/REMOTE.md">docs/REMOTE.md</a> for two transport options:</p>
+  <ul>
+    <li><strong>Cloudflare Tunnel + Bearer token</strong> — recommended. Two subdomains (one for dashboard, one for API), <code>SD_API_TOKEN</code> shared across machines, optional Cloudflare Access for SSO.</li>
+    <li><strong>Tailscale</strong> — private mesh, no public exposure, bearer token optional.</li>
+  </ul>
+
+  <h2 id="adapters">Wire your AI client</h2>
+
+  <p>Adapters push live events to SD Core so the dashboard reflects what your agent is doing. Each bridge ships with a <code>config.json</code> — edit two fields (URL + token) and you're set.</p>
+
+  <details open>
+    <summary>Claude Code (recommended — hooks + MCP)</summary>
+    <p>Marketplace install. Hooks observe PreToolUse, PostToolUse, UserPromptSubmit, SessionStart/End, etc.; the bundled MCP server adds 17 tools (memory CRUD, research, audit/budget, dream-pipeline control).</p>
+    <pre><code>/plugin marketplace add https://github.com/nomadsgalaxy/Synaptic-Disorder
+/plugin install synaptic-claude-code@synaptic-disorder</code></pre>
+  </details>
+
+  <details>
+    <summary>Claude Desktop / Cursor / Cline / Continue / Gemini CLI — MCP</summary>
+    <p>Edit <code>bridge/mcp-adapter/config.json</code>, then register the MCP server in your client. See <a href="https://github.com/nomadsgalaxy/Synaptic-Disorder/blob/main/docs/AGENT_QUICKSTART.md">AGENT_QUICKSTART.md</a> for per-client snippets.</p>
+  </details>
+
+  <details>
+    <summary>OpenTelemetry-instrumented apps (LangChain, LlamaIndex, AutoGen, CrewAI…)</summary>
+    <p>Edit <code>bridge/otlp-receiver/config.json</code>, start the receiver, point your <code>OTEL_EXPORTER_OTLP_ENDPOINT</code> at it. Works with any OpenInference instrumentation.</p>
+  </details>
+
+  <details>
+    <summary>Anything custom — Adapter SDK</summary>
+    <pre><code>import synaptic as sd
+
+with sd.connect(adapter_id="my-agent", model="claude-opus-4-7") as client:
+    client.emit("tool_call", {"tool_name": "bash"}, region_hint="motor_cortex")</code></pre>
+    <p>TypeScript SDK has the same shape. Examples in <code>bridge/sdk/python/examples/</code> and <code>bridge/sdk/typescript/examples/</code>.</p>
+  </details>
+
+  <h2 id="links">Read more</h2>
+  <ul>
+    <li><a href="https://github.com/nomadsgalaxy/Synaptic-Disorder">GitHub repo</a></li>
+    <li><a href="https://github.com/nomadsgalaxy/Synaptic-Disorder/blob/main/docs/WHAT_SYNAPTIC_IS.md">What Synaptic is (design philosophy)</a></li>
+    <li><a href="https://github.com/nomadsgalaxy/Synaptic-Disorder/blob/main/docs/research/CITATIONS.md">Full citations + architectural mapping</a></li>
+    <li><a href="https://github.com/nomadsgalaxy/Synaptic-Disorder/blob/main/docs/INTEGRATIONS.md">Integration guide — per-client config</a></li>
+    <li><a href="https://github.com/nomadsgalaxy/Synaptic-Disorder/blob/main/docs/REMOTE.md">Remote operation — Cloudflare Tunnel + Tailscale</a></li>
+    <li><a href="https://github.com/nomadsgalaxy/Synaptic-Disorder/blob/main/docs/MEMORY_AUTHORING_GUIDE.md">Memory Authoring Guide</a></li>
+    <li><a href="https://github.com/nomadsgalaxy/Synaptic-Disorder/blob/main/docs/data_privacy.md">Data privacy</a></li>
+    <li><a href="https://github.com/nomadsgalaxy/Synaptic-Disorder/blob/main/docs/event-schema.md">Event schema (v1.0)</a></li>
+    <li><a href="https://github.com/nomadsgalaxy/Synaptic-Disorder/blob/main/docs/memory-schema.md">Memory schema (v1.0)</a></li>
+  </ul>
+
+  <footer>
+    <p>Synaptic is by <a href="https://github.com/nomadsgalaxy">NomadsGalaxy</a>.</p>
+    <p>License: License pending.</p>
+    <p><a href="https://github.com/nomadsgalaxy/Synaptic">github</a> · <a href="#why">why</a> · <a href="#dream-cycle">dream cycle</a> · <a href="#science">science</a> · <a href="#install">install</a></p>
+  </footer>
+</main>
+</body>
+</html>
