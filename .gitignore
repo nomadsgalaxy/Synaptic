@@ -37,3 +37,4 @@ synaptic-disorder.zip
 # LongMemEval upstream datasets (multi-MB, fetched on demand)
 tools/bench/datasets/
 tools/bench/reports/
+tmp/
