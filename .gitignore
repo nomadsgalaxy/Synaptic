@@ -1,7 +1,39 @@
-sd_bank.db*
-*.exe
-.env
-.env.*
-tmp/
+# Ignore the SQLite fallback bank that SD Core writes to. Created by the
+# Docker mount or the native binary at <data-dir>/sd_bank.db. Personal data —
+# never commit. Test fixtures live elsewhere.
+sd_bank.db
+sd_bank.db-shm
+sd_bank.db-wal
+sd_bank.db-journal
+
+# Python local installs / build artifacts
 __pycache__/
-node_modules/
+*.pyc
+*.egg-info/
+build/
+dist/
+
+# Node deps and lockfiles in adapter packages
+**/node_modules/
+**/package-lock.json
+
+# TypeScript build output
+**/dist/
+
+# IDE / OS detritus
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Working scratch files
+*.tmp
+tmp-*
+
+# Release-mode build output (regenerable via tools/build_release.py)
+release/
+synaptic-disorder.zip
+
+# LongMemEval upstream datasets (multi-MB, fetched on demand)
+tools/bench/datasets/
+tools/bench/reports/

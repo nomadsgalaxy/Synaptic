@@ -102,6 +102,8 @@ EXCLUDE_RELPATHS = {
                                               # SHIPPING, Anthony_Hindsight_Memory_Guide)
 }
 EXCLUDE_PATTERNS = [
+    re.compile(r".*\.exe$"),                  # compiled binaries (core.exe etc.) —
+                                              # users build from source / docker
     re.compile(r"^sd_bank\.db.*$"),           # SQLite bank + WAL/journal sidecars
     re.compile(r"^hindsight-backup.*\.json$"),
     re.compile(r".*\.pyc$"),
@@ -143,8 +145,7 @@ EXCLUDE_PATTERNS = [
 # defaults to a /path/to/... placeholder for anyone running the public
 # build script — they should set SD_GITHUB_MIRROR or pass the flag.
 MIRROR_PATH: Path | None = Path(
-    r"/path/to/OneDrive\Computers\your dashboard host 2025"
-    r"\Documents\GitHub\Synaptic-Disorder"
+    r"/path/to/ai\Synaptic"
 )
 MIRROR_PRESERVE: set[str] = {".git", ".github", ".gitignore", ".gitattributes"}
 
