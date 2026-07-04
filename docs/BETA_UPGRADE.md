@@ -2,7 +2,7 @@
 
 > **You are an AI agent. Your operator already has a Synaptic beta installed and wants to upgrade it to a newer beta.** This document is written *for you*, not for them. Read it top to bottom, then execute the steps you can execute. Each section is idempotent — re-running won't break anything.
 >
-> If the operator does **not** have an existing install, follow [`Agent-Install.md`](./Agent-Install.md) instead.
+> If the operator does **not** have an existing install, follow [`AGENT_INSTALL.md`](./AGENT_INSTALL.md) instead.
 >
 > If you are a human reading this, you probably want [`README.md`](./README.md). This document exists for the beta period only and will be removed at the v1.0 public release.
 
@@ -117,7 +117,7 @@ The new install is **scrubbed by construction**: it ships no live `memories.json
 
 #### 3.0.2. Update adapter envs on every device that talks to SD Core
 
-For each device (your dashboard host's local adapters, your client machine's adapter, etc.), update the adapter's environment:
+For each device (Nomad Desktop's local adapters, RND-Laptop's adapter, etc.), update the adapter's environment:
 
 **If everything is on one machine (no remote operation):** no env-var change needed. SD_CORE_HOST + SD_CORE_PORT defaults still work; auth defaults to open. The adapter will reach `127.0.0.1:9911` as before.
 

@@ -135,7 +135,7 @@ After any of A / B / C you have a working dashboard. The HUD shows `MODEL: MOCK`
 
 Pick whichever surface your tool exposes — they all land at SD Core on `localhost:9911` and any number of them can run side-by-side. The full per-client reference (Claude Desktop, Cursor, Cline, Continue, Gemini CLI, Antigravity, OpenCode, Goose, Aider, …) is in [`docs/INTEGRATIONS.md`](docs/INTEGRATIONS.md). For wiring devices on a different network than the dashboard host (laptop on the road talking to a desktop at home), see [`docs/REMOTE.md`](docs/REMOTE.md) — Cloudflare Tunnel + Bearer token (recommended) or Tailscale (private-mesh alternative).
 
-> If the AI you want to wire up is _itself_ the one reading this README, point it at [`Agent-Install.md`](./Agent-Install.md) — it is the same content rewritten as a self-driving runbook so the agent can install Synaptic into its own client without a human in the loop.
+> If the AI you want to wire up is _itself_ the one reading this README, point it at [`docs/AGENT_INSTALL.md`](./docs/AGENT_INSTALL.md) — it is the same content rewritten as a self-driving runbook so the agent can install Synaptic into its own client without a human in the loop.
 
 #### Option 1 — Claude Code plugin (highest-fidelity)
 
@@ -376,13 +376,12 @@ Synaptic Disorder/
 │   ├── memory-schema.md            Memory record contract (v1.0)
 │   ├── memory.schema.json
 │   ├── CREDITS.md                  Third-party attribution (Allen Atlas, Three.js, etc.)
-│   └── dev/                        Dev-only docs — excluded from public release builds
-│       ├── HANDOFF.md              Agent-handoff doc for next session
-│       ├── PROJECT_PLAN.md         Living roadmap
-│       └── SHIPPING.md             One-page architecture cheat sheet
+│   ├── AGENT_INSTALL.md            Install runbook written for AI agents to self-drive
+│   └── BETA_UPGRADE.md             Upgrade runbook for existing beta installs
 ├── tools/
-│   ├── build_voxel_brain.py        Main asset rebuild pipeline
-│   ├── classifier.py               Layered region classifier (tag/keyword/Ollama)
+│   ├── install/                    Installer scripts
+│   ├── install_to_appdata.py       Copy runtime config to AppData/Local/Synaptic
+│   ├── seed_with_example.py        Opt-in synthetic example dataset
 │   └── memory_providers/           Per-provider scripts that produce memories.json
 └── bridge/
     ├── core/                       SD Core (Go binary; serves dashboard, API, WS, bubble gen)
