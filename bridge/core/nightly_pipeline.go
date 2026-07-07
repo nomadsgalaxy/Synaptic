@@ -820,6 +820,16 @@ func (pc *pipelineContext) signalProviderUse(workflow string) {
 // If 0 of the unencoded memories successfully embed AND there were
 // failures, this phase returns an error → the run lands in status=failed.
 // (Phase 0 is foundational; everything downstream depends on it.)
+//
+// SWEEP semantics (2026-07-07): this pass checks EVERY live memory for a
+// cached embedding, not just rows missing the light_encoded flag. A
+// memory edited or enriched after encoding gets a new embed-text hash,
+// so its old embedding no longer matches — but the flag stayed true and
+// the old skip-on-flag loop never revisited it. Those rows accumulated
+// (~250 in four days) until they tripped Phase 1's 5% coverage gate and
+// dedup silently skipped. The flag now only gates the flag-flip + audit
+// row; embedding existence is verified for all rows every run. Cost:
+// one SQLite point-lookup per already-encoded memory.
 func (pc *pipelineContext) runPhase0Encoding() error {
 	mems, err := pc.bank.ListMemoriesWith(MemoryListOpts{Limit: 50000})
 	if err != nil {
@@ -838,16 +848,12 @@ func (pc *pipelineContext) runPhase0Encoding() error {
 
 	const consecutiveFailureLimit = 3
 	flipped := 0
+	swept := 0 // already-flagged rows whose missing embedding we backfilled
 	failures := 0
 	consecutiveFailures := 0
 	considered := 0
 
 	for _, m := range mems {
-		if m.LightEncoded {
-			continue
-		}
-		considered++
-
 		// Build the same hash key the synapse builder uses, so embeddings
 		// written here are visible to AllEmbeddingsForMemories without
 		// translation.
@@ -865,6 +871,10 @@ func (pc *pipelineContext) runPhase0Encoding() error {
 		// content. Cheaper than re-embedding 3000+ rows on every nightly
 		// run when the synapse builder did its job between cycles.
 		existing, gerr := pc.bank.GetEmbedding(hash)
+		if gerr == nil && existing != nil && m.LightEncoded {
+			continue // embedding cached AND flag set — fully encoded
+		}
+		considered++
 		if gerr == nil && existing != nil {
 			// Already embedded — just flip the flag.
 		} else if embedder == nil {
@@ -907,6 +917,13 @@ func (pc *pipelineContext) runPhase0Encoding() error {
 			consecutiveFailures = 0 // reset run of failures on a real success
 		}
 
+		// Already-flagged row that just needed its embedding backfilled
+		// (edited/enriched content re-hashed) — no flag work left.
+		if m.LightEncoded {
+			swept++
+			continue
+		}
+
 		// Embedding is present (cache hit or freshly written). NOW flip the
 		// lifecycle flag.
 		if err := pc.bank.SetMemoryLifecycle(m.ID, "light_encoded", true); err != nil {
@@ -922,12 +939,15 @@ func (pc *pipelineContext) runPhase0Encoding() error {
 		})
 	}
 	pc.stats.Encoded = flipped
+	if swept > 0 {
+		log.Printf("nightly: phase0 sweep backfilled %d stale embeddings (edited/enriched rows re-hashed)", swept)
+	}
 
 	// Foundational failure: nothing got encoded but we tried (and failed).
 	// Returning an error here means the run lands in status=failed and
 	// downstream phases skip — which is the right call when no embeddings
 	// exist for them to operate on.
-	if considered > 0 && flipped == 0 && failures > 0 {
+	if considered > 0 && flipped == 0 && swept == 0 && failures > 0 {
 		return fmt.Errorf("phase0 encoded 0/%d memories — every embed call failed (Tier 1 unreachable or misconfigured)", considered)
 	}
 	return nil

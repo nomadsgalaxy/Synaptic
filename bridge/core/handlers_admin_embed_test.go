@@ -309,3 +309,40 @@ func TestEmbedAll_NoTier1Returns424(t *testing.T) {
 		t.Errorf("expected 424 when Tier 1 unconfigured, got %d", w.Code)
 	}
 }
+
+// Sweep semantics (2026-07-07): a memory already marked light_encoded whose
+// embedding is missing (edited/enriched → new hash) must be re-embedded by
+// Phase 0 rather than skipped forever. Guards the fix for the creeping
+// unembedded count that tripped Phase 1's 5% coverage gate.
+func TestPhase0_SweepBackfillsFlaggedButUnembedded(t *testing.T) {
+	bank := newTestBank(t)
+	rec, _ := bank.SaveMemory(MemoryRecord{Text: "hello", Tags: []string{"a"}})
+	// Simulate the leak: flag set, but no embedding row exists for the hash.
+	if err := bank.SetMemoryLifecycle(rec.ID, "light_encoded", true); err != nil {
+		t.Fatalf("set lifecycle: %v", err)
+	}
+	emb := newScriptedEmbedder()
+	pc := newPipelineCtxWithEmbedder(t, bank, emb)
+
+	if err := pc.runPhase0Encoding(); err != nil {
+		t.Fatalf("phase0: %v", err)
+	}
+	if got := int(emb.calls.Load()); got != 1 {
+		t.Errorf("expected exactly 1 embed call for the swept row, got %d", got)
+	}
+	hash := synapseTextHash(synapseEmbedText(map[string]interface{}{"text": "hello", "tags": []interface{}{"a"}}))
+	if vec, _ := bank.GetEmbedding(hash); vec == nil {
+		t.Errorf("expected sweep to persist the missing embedding")
+	}
+	// Flag was already set — Encoded counts flag flips only.
+	if pc.stats.Encoded != 0 {
+		t.Errorf("expected stats.Encoded=0 (no flag flipped), got %d", pc.stats.Encoded)
+	}
+	// Second run: fully encoded now, no further embed calls.
+	if err := pc.runPhase0Encoding(); err != nil {
+		t.Fatalf("phase0 second run: %v", err)
+	}
+	if got := int(emb.calls.Load()); got != 1 {
+		t.Errorf("expected no additional embed calls on second run, got %d total", got)
+	}
+}
