@@ -28,20 +28,25 @@ const url = require('url');
 let input = '';
 process.stdin.on('data', chunk => { input += chunk; });
 process.stdin.on('end', () => {
+  let events = [];
   try {
     const payload = input.length > 0 ? JSON.parse(input) : {};
     const eventName = process.argv[2];
-    const events = translate(eventName, payload);
-    if (events) {
-      const list = Array.isArray(events) ? events : [events];
-      list.forEach(postEvent);
+    const translated = translate(eventName, payload);
+    if (translated) {
+      events = Array.isArray(translated) ? translated : [translated];
     }
   } catch (_) {
     // Silent fail — never block Hermes on this.
   }
-  // Hermes treats exit 0 as "allow". Don't write to stdout — unlike
-  // Gemini CLI, Hermes doesn't require a JSON ack.
-  process.exit(0);
+  // Wait for all HTTP requests to complete before exiting so the
+  // events actually reach SD Core. (process.exit(0) here used to
+  // kill the process before the async requests could finish.)
+  if (events.length > 0) {
+    Promise.all(events.map(postEvent)).finally(() => process.exit(0));
+  } else {
+    process.exit(0);
+  }
 });
 
 // ── Config (env-overridable) ─────────────────────────────────────────
@@ -258,27 +263,30 @@ function translate(hermesEvent, payload) {
 
 // ── POST helper ──────────────────────────────────────────────────────
 function postEvent(event) {
-  let body;
-  try { body = JSON.stringify(event); } catch (_) { return; }
-  const u = new url.URL(SD_CORE_URL);
-  const transport = u.protocol === 'https:' ? https : http;
-  const headers = {
-    'Content-Type': 'application/json',
-    'Content-Length': Buffer.byteLength(body),
-  };
-  if (SD_API_TOKEN) {
-    headers['Authorization'] = 'Bearer ' + SD_API_TOKEN;
-  }
-  const req = transport.request({
-    hostname: u.hostname,
-    port: u.port || (u.protocol === 'https:' ? 443 : 80),
-    path: (u.pathname === '/' ? '' : u.pathname) + '/event',
-    method: 'POST',
-    headers,
-    timeout: 2500, // hard cap so a hung Core doesn't slow Hermes
+  return new Promise((resolve) => {
+    let body;
+    try { body = JSON.stringify(event); } catch (_) { return resolve(); }
+    const u = new url.URL(SD_CORE_URL);
+    const transport = u.protocol === 'https:' ? https : http;
+    const headers = {
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(body),
+    };
+    if (SD_API_TOKEN) {
+      headers['Authorization'] = 'Bearer ' + SD_API_TOKEN;
+    }
+    const req = transport.request({
+      hostname: u.hostname,
+      port: u.port || (u.protocol === 'https:' ? 443 : 80),
+      path: (u.pathname === '/' ? '' : u.pathname) + '/event',
+      method: 'POST',
+      headers,
+      timeout: 2500, // hard cap so a hung Core doesn't slow Hermes
+    });
+    req.on('response', () => { try { req.destroy(); } catch (_) {} resolve(); });
+    req.on('error', () => resolve()); // silent drop
+    req.on('timeout', () => { try { req.destroy(); } catch (_) {} resolve(); });
+    req.write(body);
+    req.end();
   });
-  req.on('error', () => {}); // silent drop
-  req.on('timeout', () => { try { req.destroy(); } catch (_) {} });
-  req.write(body);
-  req.end();
 }
